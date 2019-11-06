@@ -9,11 +9,11 @@ import {
   ResponsiveContainer,
   ReferenceLine
 } from "recharts";
-
 import { useSelector, useDispatch } from "react-redux";
 import { updateChartAction } from "../redux/actions";
 import { Loading } from "../../loading";
 import { ErrorMessage } from "../../error-message";
+import { AppState } from "../../../store";
 import "./Chart.css";
 
 const tenors = [
@@ -50,22 +50,13 @@ const formatDate = (isoDate: Date, ChartRange: string) => {
   }
 };
 
-interface ChartDataValue {
-  date: Date;
-  close: string;
-}
-interface StateType {
-  chartData: { selectedChartData: []; selectedChartRange: string };
-  stockTickerData: { selectedStockTicker: { latestPrice: number } };
-}
-
 export const Chart = () => {
   const dispatch = useDispatch();
   const { selectedChartData, selectedChartRange } = useSelector(
-    (state: StateType) => state.chartData
+    (state: AppState) => state.chartData
   );
   const { selectedStockTicker } = useSelector(
-    (state: StateType) => state.stockTickerData
+    (state: AppState) => state.stockTickerData
   );
   const updateChartRange = (stock: string) =>
     dispatch(updateChartAction(stock));
@@ -73,17 +64,17 @@ export const Chart = () => {
   //   updateChartRange(event.currentTarget.value);
   // };
 
-  const chartData =
-    selectedChartData &&
-    selectedChartData.map((data: ChartDataValue) => ({
-      date: formatDate(data.date, selectedChartRange),
-      close: data.close
-    }));
+  const chartData = selectedChartData
+    ? selectedChartData.map(data => ({
+        date: formatDate(data.date, selectedChartRange),
+        close: data.close
+      }))
+    : [];
 
   const renderChartComponent = () => (
     <>
       <div className="chart__wrapper">
-        {selectedChartData.length !== 0 ? (
+        {chartData.length !== 0 ? (
           tenors.map(({ value, label }) => {
             const activeClass =
               selectedChartRange === value ? "chart__button--active" : "";

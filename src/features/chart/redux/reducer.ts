@@ -1,31 +1,36 @@
 import { UPDATE_CHART_RANGE, UPDATE_CHART_DATA, RESET } from "./constants";
 import { ChartActions } from "./actions";
+import { Reducer } from "redux";
 
 export type ChartState = {
   selectedChartRange: string;
-  selectedChartData: Object[] | null; // TODO: Create proper structure
-};
-export type ResetAction = {
-  type: typeof RESET;
-  payload?: {};
+  selectedChartData: { date: Date; close: number }[] | null; // TODO: Create proper structure
 };
 
-const initialState = { selectedChartRange: "5y", selectedChartData: null };
-export const chartReducer = (
-  state: ChartState = initialState,
-  { type, payload }: ChartActions | ResetAction
+export type ResetAction = {
+  type: typeof RESET;
+};
+
+const initialState: ChartState = {
+  selectedChartRange: "5y",
+  selectedChartData: null
+};
+
+export const chartReducer: Reducer<ChartState, ChartActions | ResetAction> = (
+  state = initialState,
+  action
 ) => {
-  switch (type) {
+  switch (action.type) {
     case UPDATE_CHART_RANGE:
       return {
         ...state,
-        selectedChartRange: payload,
+        selectedChartRange: action.payload,
         selectedChartData: null
       };
     case UPDATE_CHART_DATA:
       return {
         ...state,
-        selectedChartData: payload
+        selectedChartData: action.payload
       };
     case RESET:
       return { ...initialState };

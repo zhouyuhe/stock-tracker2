@@ -2,13 +2,16 @@ import { BOOTSTRAP } from "../../../store/constants";
 import { UPDATE_CHART_RANGE } from "./constants";
 import { updateChartDataAction } from "./actions";
 import { Middleware, Dispatch, AnyAction } from "redux";
-import { combinedReducer } from "../../../store";
-import { SocketSerivce } from "../../../services/socketService";
+import { AppState } from "../../../store";
+import { SocketService } from "../../../services/socketService";
 
-export type GlobalState = ReturnType<typeof combinedReducer>;
-export type ChartMiddleware = ({
-  socketService
-}: SocketSerivce) => Middleware<Dispatch, GlobalState, Dispatch<AnyAction>>;
+export type Dependencies = {
+  socketService: SocketService;
+};
+
+export type ChartMiddleware = (
+  dependencies: Dependencies
+) => Middleware<{}, AppState, Dispatch<AnyAction>>;
 
 export const chartMiddleware: ChartMiddleware = ({
   socketService
@@ -24,7 +27,7 @@ export const chartMiddleware: ChartMiddleware = ({
   }
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
-    socket.on("chartData", (payload: string) => {
+    socket.on("chartData", (payload: { date: Date; close: number }[]) => {
       store.dispatch(updateChartDataAction(payload));
     });
   }
