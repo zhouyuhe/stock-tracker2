@@ -1,6 +1,6 @@
 import { BOOTSTRAP } from "../../../store/constants";
 import { UPDATE_CHART_RANGE } from "./constants";
-import { updateChartDataAction, UpdateChartDataAction } from "./actions";
+import { updateChartDataAction } from "./actions";
 import { Middleware, Dispatch, AnyAction } from "redux";
 import { combinedReducer } from "../../../store";
 import { SocketSerivce } from "../../../services/socketService";
