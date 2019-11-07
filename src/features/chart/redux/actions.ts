@@ -1,9 +1,10 @@
 import { UPDATE_CHART_RANGE, UPDATE_CHART_DATA } from "./constants";
+import { ActionWithPayload } from "../../../store/actions";
 
-export type UpdateChartRangeAction = {
-  type: typeof UPDATE_CHART_RANGE;
-  payload: string;
-};
+export type UpdateChartRangeAction = ActionWithPayload<
+  typeof UPDATE_CHART_RANGE,
+  string
+>;
 
 export const updateChartAction = (
   chartRange: string
@@ -12,10 +13,10 @@ export const updateChartAction = (
   payload: chartRange
 });
 
-export type UpdateChartDataAction = {
-  type: typeof UPDATE_CHART_DATA;
-  payload: { date: Date; close: number }[] | null;
-};
+export type UpdateChartDataAction = ActionWithPayload<
+  typeof UPDATE_CHART_DATA,
+  { date: Date; close: number }[] | null
+>;
 
 export const updateChartDataAction = (
   chartData: { date: Date; close: number }[] | null

@@ -1,7 +1,7 @@
 import { BOOTSTRAP } from "../../../store/constants";
 import { UPDATE_CHART_RANGE } from "./constants";
 import { updateChartDataAction } from "./actions";
-import { Middleware, Dispatch, AnyAction } from "redux";
+import { Middleware } from "redux";
 import { AppState } from "../../../store";
 import { SocketService } from "../../../services/socketService";
 
@@ -11,7 +11,7 @@ export type Dependencies = {
 
 export type ChartMiddleware = (
   dependencies: Dependencies
-) => Middleware<{}, AppState, Dispatch<AnyAction>>;
+) => Middleware<{}, AppState>;
 
 export const chartMiddleware: ChartMiddleware = ({
   socketService

@@ -7,7 +7,8 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  ReferenceLine
+  ReferenceLine,
+  Label
 } from "recharts";
 import { useSelector, useDispatch } from "react-redux";
 import { updateChartAction } from "../redux/actions";
@@ -16,7 +17,9 @@ import { ErrorMessage } from "../../error-message";
 import { AppState } from "../../../store";
 import "./Chart.css";
 
-const tenors = [
+type Tenor = { value: string; label: string };
+
+const tenors: Tenor[] = [
   { value: "1d", label: "1D" },
   { value: "5d", label: "5D" },
   { value: "1m", label: "1M" },
@@ -60,16 +63,11 @@ export const Chart = () => {
   );
   const updateChartRange = (stock: string) =>
     dispatch(updateChartAction(stock));
-  // const onClickHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
-  //   updateChartRange(event.currentTarget.value);
-  // };
 
-  const chartData = selectedChartData
-    ? selectedChartData.map(data => ({
-        date: formatDate(data.date, selectedChartRange),
-        close: data.close
-      }))
-    : [];
+  const chartData = (selectedChartData || []).map(data => ({
+    date: formatDate(data.date, selectedChartRange),
+    close: data.close
+  }));
 
   const renderChartComponent = () => (
     <>
@@ -84,7 +82,6 @@ export const Chart = () => {
                 key={label}
                 className={`chart__button ${activeClass}`}
                 onClick={() => updateChartRange(value)}
-                // onClick={onClickHandler}
                 value={value}
               >
                 {label}
@@ -130,11 +127,11 @@ export const Chart = () => {
           <ReferenceLine
             y={selectedStockTicker.latestPrice}
             label={
-              {
-                value: String(selectedStockTicker.latestPrice),
-                position: "right",
-                fill: "#e95656"
-              } as any
+              <Label
+                value={selectedStockTicker.latestPrice}
+                position="right"
+                fill="#e95656"
+              />
             }
             stroke="#e95656"
             strokeDasharray="3 3"
