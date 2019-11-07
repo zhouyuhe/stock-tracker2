@@ -1,6 +1,6 @@
 import { BOOTSTRAP, RESET } from "./constants";
 
-export const bootstrap = () => ({ type: BOOTSTRAP });
+export const bootstrap = (): BootstrapAction => ({ type: BOOTSTRAP });
 export type BootstrapAction = Action<typeof BOOTSTRAP>;
 export type ResetAction = Action<typeof RESET>;
 
