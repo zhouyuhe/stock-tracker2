@@ -32,14 +32,14 @@ describe("with an UPDATE_CHART_DATA action", () => {
     };
     const action: UpdateChartDataAction = {
       type: UPDATE_CHART_DATA,
-      payload: [{ date: new Date("2014-09-09"), close: 2 }]
+      payload: [{ date: "2014-09-09", close: 2 }]
     };
     newState = chartReducer(initialState, action);
   });
 
   it('it updates the chart to "Chart Data"', () => {
     expect(newState.selectedChartData).toEqual([
-      { date: new Date("2014-09-09"), close: 2 }
+      { date: "2014-09-09", close: 2 }
     ]);
   });
 });
