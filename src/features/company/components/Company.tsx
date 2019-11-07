@@ -3,31 +3,42 @@ import { Peers } from "../../peers";
 import { useSelector } from "react-redux";
 import { Loading } from "../../loading";
 import "./Company.css";
+import { AppState } from "../../../store";
 
 export const Company = () => {
   const { selectedCompanyOverview } = useSelector(
-    state => state.companyOverviewData
+    (state: AppState) => state.companyOverviewData
   );
-  const { selectedTopPeers } = useSelector(state => state.peerData);
+  const { selectedTopPeers } = useSelector((state: AppState) => state.peerData);
 
   const renderCompanyComponent = () => (
     <>
       <div className="company-overview__title">
-        {selectedCompanyOverview.companyName || "N/A"} (
-        {selectedCompanyOverview.symbol || "N/A"})
+        {`${(selectedCompanyOverview !== null &&
+          selectedCompanyOverview.companyName) ||
+          "N/A"} (${(selectedCompanyOverview !== null &&
+          selectedCompanyOverview.symbol) ||
+          "N/A"})`}
       </div>
       <div>
         <a
           target="_blank"
           rel="noopener noreferrer"
           className="company-overview__website"
-          href={`${selectedCompanyOverview.website}`}
+          href={`${selectedCompanyOverview !== null &&
+            selectedCompanyOverview.website}`}
         >
-          {selectedCompanyOverview.website || "N/A"}
+          {(selectedCompanyOverview !== null &&
+            selectedCompanyOverview.website) ||
+            "N/A"}
         </a>
       </div>
       <div className="company-overview__text">
-        <p>{selectedCompanyOverview.description || "N/A"}</p>
+        <p>
+          {(selectedCompanyOverview !== null &&
+            selectedCompanyOverview.description) ||
+            "N/A"}
+        </p>
       </div>
     </>
   );
