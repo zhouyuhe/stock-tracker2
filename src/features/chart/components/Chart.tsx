@@ -7,16 +7,19 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  ReferenceLine
+  ReferenceLine,
+  Label
 } from "recharts";
-
 import { useSelector, useDispatch } from "react-redux";
 import { updateChartAction } from "../redux/actions";
 import { Loading } from "../../loading";
 import { ErrorMessage } from "../../error-message";
+import { AppState } from "../../../store";
 import "./Chart.css";
 
-const tenors = [
+type Tenor = { value: string; label: string };
+
+const tenors: Tenor[] = [
   { value: "1d", label: "1D" },
   { value: "5d", label: "5D" },
   { value: "1m", label: "1M" },
@@ -25,9 +28,9 @@ const tenors = [
   { value: "max", label: "MAX" }
 ];
 
-const yaxisFormat = item => item.toFixed(2);
+const yaxisFormat = (item: number) => item.toFixed(2);
 
-const formatDate = (isoDate, ChartRange) => {
+const formatDate = (isoDate: string, ChartRange: string) => {
   const date = new Date(isoDate);
   switch (ChartRange) {
     case "max":
@@ -53,25 +56,23 @@ const formatDate = (isoDate, ChartRange) => {
 export const Chart = () => {
   const dispatch = useDispatch();
   const { selectedChartData, selectedChartRange } = useSelector(
-    state => state.chartData
+    (state: AppState) => state.chartData
   );
-  const { selectedStockTicker } = useSelector(state => state.stockTickerData);
-  const updateChartRange = stock => dispatch(updateChartAction(stock));
-  const onClickHandler = event => {
-    updateChartRange(event.target.value);
-  };
+  const { selectedStockTicker } = useSelector(
+    (state: AppState) => state.stockTickerData
+  );
+  const updateChartRange = (stock: string) =>
+    dispatch(updateChartAction(stock));
 
-  const chartData =
-    selectedChartData &&
-    selectedChartData.map(data => ({
-      date: formatDate(data.date, selectedChartRange),
-      close: data.close
-    }));
+  const chartData = (selectedChartData || []).map(data => ({
+    date: formatDate(data.date, selectedChartRange),
+    close: data.close
+  }));
 
   const renderChartComponent = () => (
     <>
       <div className="chart__wrapper">
-        {selectedChartData.length !== 0 ? (
+        {chartData.length !== 0 ? (
           tenors.map(({ value, label }) => {
             const activeClass =
               selectedChartRange === value ? "chart__button--active" : "";
@@ -80,7 +81,7 @@ export const Chart = () => {
               <button
                 key={label}
                 className={`chart__button ${activeClass}`}
-                onClick={onClickHandler}
+                onClick={() => updateChartRange(value)}
                 value={value}
               >
                 {label}
@@ -125,11 +126,13 @@ export const Chart = () => {
           <Tooltip />
           <ReferenceLine
             y={selectedStockTicker.latestPrice}
-            label={{
-              value: String(selectedStockTicker.latestPrice),
-              position: "right",
-              fill: "#e95656"
-            }}
+            label={
+              <Label
+                value={selectedStockTicker.latestPrice}
+                position="right"
+                fill="#e95656"
+              />
+            }
             stroke="#e95656"
             strokeDasharray="3 3"
           />

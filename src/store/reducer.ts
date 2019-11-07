@@ -8,6 +8,8 @@ import { chartReducer } from "../features/chart";
 import { headlineReducer } from "../features/headline";
 import { stockReducer } from "../reducer";
 
+export type AppState = ReturnType<typeof combinedReducer>;
+
 export const combinedReducer = combineReducers({
   stockData: stockReducer,
   peerData: peerReducer,
