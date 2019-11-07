@@ -1,12 +1,12 @@
 import { UPDATE_CHART_RANGE, UPDATE_CHART_DATA } from "./constants";
-import { ChartActions } from "./actions";
+import { ChartActions, ChartData } from "./actions";
 import { Reducer } from "redux";
 import { ResetAction } from "../../../store/actions";
 import { RESET } from "../../../store/constants";
 
 export type ChartState = {
   selectedChartRange: string;
-  selectedChartData: { date: Date; close: number }[] | null;
+  selectedChartData: ChartData[] | null;
 };
 
 const initialState: ChartState = {

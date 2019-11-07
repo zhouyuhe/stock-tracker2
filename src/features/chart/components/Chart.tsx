@@ -30,7 +30,7 @@ const tenors: Tenor[] = [
 
 const yaxisFormat = (item: number) => item.toFixed(2);
 
-const formatDate = (isoDate: Date, ChartRange: string) => {
+const formatDate = (isoDate: string, ChartRange: string) => {
   const date = new Date(isoDate);
   switch (ChartRange) {
     case "max":
