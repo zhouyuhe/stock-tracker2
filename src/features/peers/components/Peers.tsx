@@ -1,22 +1,27 @@
-import React from "react";
+import React, { FC, MouseEventHandler } from "react";
 import { Loading } from "../../loading";
 import { ErrorMessage } from "../../error-message";
 import { useDispatch } from "react-redux";
 import { updateStockAction } from "../../../actions";
 import "./Peers.css";
+import { PeersData } from "../redux/actions";
 
-export const Peers = ({ peers }) => {
+type PeersProps = {
+  peers: PeersData[] | null;
+};
+
+export const Peers: FC<PeersProps> = ({ peers }) => {
   const dispatch = useDispatch();
-  const onClickHandler = event => {
-    const symbol = event.target.value;
-    const peerStock = peers.find(peer => peer.symbol === symbol);
+  const onClickHandler: MouseEventHandler<HTMLButtonElement> = event => {
+    const symbol = event.currentTarget.value;
+    const peerStock = peers && peers.find(peer => peer.symbol === symbol);
     if (peerStock && peerStock.name) {
       dispatch(updateStockAction(peerStock));
     }
   };
   const renderPeersComponent = () => (
     <ul className="peers__list">
-      {peers.length !== 0 ? (
+      {peers && peers.length !== 0 ? (
         peers.map(({ symbol }) => (
           <button
             onClick={onClickHandler}
