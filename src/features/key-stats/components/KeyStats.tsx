@@ -4,6 +4,7 @@ import { Loading } from "../../loading";
 import "./KeyStats.css";
 import { AppState } from "../../../store";
 import { KeyStatsData } from "../redux/actions";
+import { ErrorMessage } from "../../error-message";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat();
 
@@ -74,14 +75,16 @@ export const KeyStats = () => {
   );
 
   const renderKeystatsComponent = React.useCallback(() => {
-    const tableData = selectedKeyStats
-      ? schema.map(({ key, label, formatter = DEFAULT_FORMATTER }) => (
-          <tr key={key}>
-            <td>{label}</td>
-            <td>{formatter(selectedKeyStats, key)}</td>
-          </tr>
-        ))
-      : null;
+    const tableData = selectedKeyStats ? (
+      schema.map(({ key, label, formatter = DEFAULT_FORMATTER }) => (
+        <tr key={key}>
+          <td>{label}</td>
+          <td>{formatter(selectedKeyStats, key)}</td>
+        </tr>
+      ))
+    ) : (
+      <ErrorMessage message="KeyStats data N/A" />
+    );
 
     return (
       <div className="key-stats__wrapper">
