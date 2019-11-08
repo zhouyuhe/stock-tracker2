@@ -10,10 +10,10 @@ export type LatestNewsData = {
 
 export type UpdateLatestNewsAction = ActionWithPayload<
   typeof UPDATE_LATEST_NEWS,
-  LatestNewsData
+  LatestNewsData[]
 >;
 export const updateLatestNewsAction = (
-  latestNews: LatestNewsData
+  latestNews: LatestNewsData[]
 ): UpdateLatestNewsAction => ({
   type: UPDATE_LATEST_NEWS,
   payload: latestNews
