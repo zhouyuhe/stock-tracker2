@@ -11,7 +11,7 @@ const NUMBER_FORMATTER = new Intl.NumberFormat();
 const DEFAULT_FORMATTER = (
   keyStatsData: KeyStatsData,
   key: keyof KeyStatsData
-) => (keyStatsData[key] != null ? String(keyStatsData[key]) : "N/A");
+) => (keyStatsData[key] !== null ? keyStatsData[key] : "N/A");
 
 type Formatter = (keyStatsData: KeyStatsData) => string;
 
