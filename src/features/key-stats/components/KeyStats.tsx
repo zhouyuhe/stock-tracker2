@@ -8,10 +8,12 @@ import { ErrorMessage } from "../../error-message";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat();
 
-const DEFAULT_FORMATTER = (data: KeyStatsData, key: keyof KeyStatsData) =>
-  data[key] != null ? String(data[key]) : "N/A";
+const DEFAULT_FORMATTER = (
+  keyStatsData: KeyStatsData,
+  key: keyof KeyStatsData
+) => (keyStatsData[key] != null ? String(keyStatsData[key]) : "N/A");
 
-type Formatter = (data: KeyStatsData) => string;
+type Formatter = (keyStatsData: KeyStatsData) => string;
 
 type Schema = {
   key: keyof KeyStatsData;
@@ -27,18 +29,21 @@ const schema: Schema = [
   {
     key: "low",
     label: "Day Range",
-    formatter: data =>
-      data.low && data.high ? `${data.low}-${data.high}` : "N/A"
+    formatter: keyStatsData =>
+      keyStatsData.low && keyStatsData.high
+        ? `${keyStatsData.low}-${keyStatsData.high}`
+        : "N/A"
   },
   {
     key: "previousVolume",
     label: "Volume",
-    formatter: data => NUMBER_FORMATTER.format(data.previousVolume)
+    formatter: keyStatsData =>
+      NUMBER_FORMATTER.format(keyStatsData.previousVolume)
   },
   {
     key: "marketCap",
     label: "Market Cap",
-    formatter: data => NUMBER_FORMATTER.format(data.marketCap)
+    formatter: keyStatsData => NUMBER_FORMATTER.format(keyStatsData.marketCap)
   },
   {
     key: "peRatio",
@@ -51,12 +56,14 @@ const schema: Schema = [
   {
     key: "week52Low",
     label: "52 Week Range",
-    formatter: data => `${data.week52Low}-${data.week52High}`
+    formatter: keyStatsData =>
+      `${keyStatsData.week52Low}-${keyStatsData.week52High}`
   },
   {
     key: "avgTotalVolume",
     label: "Total Avg. Volume",
-    formatter: data => NUMBER_FORMATTER.format(data.avgTotalVolume)
+    formatter: keyStatsData =>
+      NUMBER_FORMATTER.format(keyStatsData.avgTotalVolume)
   },
   {
     key: "eps",
@@ -65,7 +72,8 @@ const schema: Schema = [
   {
     key: "ytdChange",
     label: "Dividend & Yield",
-    formatter: data => (data.ytdChange * 100).toPrecision(3) + "%"
+    formatter: keyStatsData =>
+      (keyStatsData.ytdChange * 100).toPrecision(3) + "%"
   }
 ];
 
