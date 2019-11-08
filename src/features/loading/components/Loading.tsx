@@ -1,7 +1,11 @@
 import React from "react";
 import "./Loading.css";
 
-export const Loading = ({ loaded, render }) => {
+type LoadingProps = {
+  loaded: boolean;
+  render: () => JSX.Element;
+};
+export const Loading = ({ loaded, render }: LoadingProps) => {
   if (!loaded) {
     return (
       <div className="center-spinner">
