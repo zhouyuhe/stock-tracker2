@@ -6,7 +6,7 @@ describe("with an UPDATE_KEY_STATS action", () => {
   let newState: KeyStatsState;
 
   beforeAll(() => {
-    const initialState = {
+    const initialState: KeyStatsState = {
       selectedKeyStats: null
     };
     const action: UpdateKeyStatsAction = {

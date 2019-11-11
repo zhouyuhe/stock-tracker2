@@ -14,7 +14,7 @@ describe("with an UPDATE_SEARCH action", () => {
   let newState: HeadlineState;
 
   beforeAll(() => {
-    const initialState = {
+    const initialState: HeadlineState = {
       selectedSearch: null,
       enteredSearchQuery: "",
       selectedCompanySymbols: []
@@ -47,7 +47,7 @@ describe("with an UPDATE_SEARCH_QUERY action", () => {
   let newState: HeadlineState;
 
   beforeAll(() => {
-    const initialState = {
+    const initialState: HeadlineState = {
       selectedSearch: null,
       enteredSearchQuery: "",
       selectedCompanySymbols: []
