@@ -4,11 +4,7 @@ import {
   UPDATE_SEARCH,
   UPDATE_SEARCH_QUERY
 } from "./constants";
-import {
-  CompanySymbolData,
-  UpdateHeadlineAction,
-  SearchDataProps
-} from "./actions";
+import { CompanySymbolData, HeadlineAction, SearchDataProps } from "./actions";
 import { Reducer } from "redux";
 import { ResetAction } from "../../../store/actions";
 
@@ -25,7 +21,7 @@ const initialState: HeadlineState = {
 
 export const headlineReducer: Reducer<
   HeadlineState,
-  UpdateHeadlineAction | ResetAction
+  HeadlineAction | ResetAction
 > = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_SEARCH:

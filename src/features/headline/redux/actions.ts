@@ -8,7 +8,7 @@ import { ActionWithPayload } from "../../../store/actions";
 export type SearchDataProps = {
   primaryExchange: string;
   sector: string;
-  currency: string | null;
+  currency: string;
   companyName: string;
   symbol: string;
 };
@@ -51,7 +51,7 @@ export const updateSearchQueryAction = (
   payload: searchQuery
 });
 
-export type UpdateHeadlineAction =
+export type HeadlineAction =
   | UpdateSearchQueryAction
   | UpdateCompanySymbolAction
   | UpdateSearchAction;
