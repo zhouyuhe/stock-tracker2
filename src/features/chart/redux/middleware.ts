@@ -21,7 +21,7 @@ export const chartMiddleware: ChartMiddleware = ({
       .get()
       .emit(
         "timeRange",
-        store.getState().stockData.selectedStock.symbol,
+        store.getState().stockData.selectedStock!.symbol,
         action.payload
       );
   }

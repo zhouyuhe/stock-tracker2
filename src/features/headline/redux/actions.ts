@@ -6,7 +6,6 @@ import {
 import { ActionWithPayload } from "../../../store/actions";
 
 export type SearchDataProps = {
-  [index: string]: string;
   primaryExchange: string;
   sector: string;
   currency: string;

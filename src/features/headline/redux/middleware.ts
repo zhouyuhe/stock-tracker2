@@ -8,7 +8,7 @@ import {
 import { UPDATE_SEARCH_QUERY } from "./constants";
 import { SocketService } from "../../../services/socketService";
 import { Middleware, AnyAction } from "redux";
-import { HeadlineState } from "./reducer";
+import { AppState } from "../../../store";
 
 type TypeOfAction<T> = (input: T) => AnyAction;
 type DataToFetch = {
@@ -26,7 +26,7 @@ export type Dependencies = {
 };
 export type HeadlineMiddleware = (
   dependencies: Dependencies
-) => Middleware<{}, HeadlineState>;
+) => Middleware<{}, AppState>;
 export const headlineMiddleware: HeadlineMiddleware = ({
   socketService
 }) => store => next => action => {
