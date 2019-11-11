@@ -2,7 +2,7 @@ import React, { FC, MouseEventHandler } from "react";
 import { Loading } from "../../loading";
 import { ErrorMessage } from "../../error-message";
 import { useDispatch } from "react-redux";
-import { updateStockAction } from "../../../actions";
+import { updateStockAction } from "actions";
 import "./Peers.css";
 import { PeersData } from "../redux/actions";
 

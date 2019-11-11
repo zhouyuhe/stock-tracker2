@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateChartAction } from "../redux/actions";
 import { Loading } from "../../loading";
 import { ErrorMessage } from "../../error-message";
-import { AppState } from "../../../store";
+import { AppState } from "store";
 import "./Chart.css";
 
 type Tenor = { value: string; label: string };

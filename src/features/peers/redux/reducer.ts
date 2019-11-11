@@ -1,7 +1,7 @@
-import { RESET } from "../../../store/constants";
+import { RESET } from "store/constants";
 import { UPDATE_TOP_PEERS } from "./constants";
 import { PeersData, UpdateTopPeersAction } from "./actions";
-import { ResetAction } from "../../../store/actions";
+import { ResetAction } from "store/actions";
 import { Reducer } from "redux";
 
 export type PeersState = {

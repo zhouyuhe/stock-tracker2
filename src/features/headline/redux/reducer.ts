@@ -1,4 +1,4 @@
-import { RESET } from "../../../store/constants";
+import { RESET } from "store/constants";
 import {
   UPDATE_COMPANY_SYMBOLS,
   UPDATE_SEARCH,
@@ -6,7 +6,7 @@ import {
 } from "./constants";
 import { CompanySymbolData, HeadlineAction, SearchDataProps } from "./actions";
 import { Reducer } from "redux";
-import { ResetAction } from "../../../store/actions";
+import { ResetAction } from "store/actions";
 
 export type HeadlineState = {
   selectedSearch: SearchDataProps | null;

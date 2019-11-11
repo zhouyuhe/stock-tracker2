@@ -1,5 +1,5 @@
 import { UPDATE_LATEST_NEWS } from "./constants";
-import { ActionWithPayload } from "../../../store/actions";
+import { ActionWithPayload } from "store/actions";
 
 export type LatestNewsData = {
   headline: string;

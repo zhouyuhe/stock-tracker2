@@ -1,5 +1,5 @@
 import { UPDATE_STOCK_TICKER } from "./constants";
-import { ActionWithPayload } from "../../../store/actions";
+import { ActionWithPayload } from "store/actions";
 export type StockTickerData = {
   latestPrice: number;
   latestUpdate: Date;

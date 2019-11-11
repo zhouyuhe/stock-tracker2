@@ -1,11 +1,11 @@
-import { combinedReducer } from "../reducer";
+import { combinedReducer, AppState } from "../reducer";
 
-const createInitialState = () => ({
+const createInitialState: AppState = {
   stockData: {
-    selectedStock: ""
+    selectedStock: undefined
   },
   headlineData: {
-    selectedSearch: "",
+    selectedSearch: null,
     enteredSearchQuery: "",
     selectedCompanySymbols: []
   },
@@ -14,7 +14,7 @@ const createInitialState = () => ({
     selectedChartData: null
   },
   keyStatsData: {
-    selectedKeyStats: ""
+    selectedKeyStats: null
   },
   latestNewsData: {
     selectedLatestNews: null
@@ -26,13 +26,13 @@ const createInitialState = () => ({
     selectedTopPeers: null
   },
   stockTickerData: {
-    selectedStockTicker: ""
+    selectedStockTicker: undefined
   }
-});
+};
 
 describe("Test combineReducer with an UNKNOWN action", () => {
   it("it should not change the state when an unknown/invalid action is provided", () => {
-    const _init = createInitialState();
+    const _init = createInitialState;
     const result = combinedReducer(_init, { type: "TEST__NOTHING" });
     expect(result).toBe(_init);
   });

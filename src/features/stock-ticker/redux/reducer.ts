@@ -1,8 +1,8 @@
-import { RESET } from "../../../store/constants";
+import { RESET } from "store/constants";
 import { UPDATE_STOCK_TICKER } from "./constants";
 import { Reducer } from "redux";
 import { UpdateStockTickerAction, StockTickerData } from "./actions";
-import { ResetAction } from "../../../store/actions";
+import { ResetAction } from "store/actions";
 
 export type StockTickerState = {
   selectedStockTicker: StockTickerData | undefined;
