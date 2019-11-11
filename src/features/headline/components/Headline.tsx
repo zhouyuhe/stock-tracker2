@@ -1,13 +1,16 @@
 import React from "react";
 import logo from "./adaptive-logo.png";
 import { Search } from "../../search";
-import { useDispatch, useSelector } from "react-redux";
-import { updateStockAction } from "../../../actions";
+import { useSelector } from "react-redux";
 import { StockTicker } from "../../stock-ticker";
 import { MarketStatus } from "../../market-status";
 import "./Headline.css";
 import { AppState } from "../../../store";
 
+export type StockProps = {
+  name: string;
+  symbol: string;
+};
 export const Headline = () => {
   const { selectedStockTicker } = useSelector(
     (state: AppState) => state.stockTickerData
@@ -18,8 +21,6 @@ export const Headline = () => {
   const { selectedSearch } = useSelector(
     (state: AppState) => state.headlineData
   );
-
-  const dispatch = useDispatch();
 
   const labels = selectedSearch && (
     <ul>
@@ -35,9 +36,7 @@ export const Headline = () => {
     <div className="header">
       <img className="header__logo" src={logo} alt="Adaptive Logo" />
       <div className="search-bar__wrapper">
-        <Search
-          updateStock={(stock: string) => dispatch(updateStockAction(stock))}
-        />
+        <Search />
         {selectedSearch && <StockTicker stock={selectedStockTicker} />}
       </div>
       {selectedSearch && (

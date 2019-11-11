@@ -3,14 +3,17 @@ import React, {
   useRef,
   useEffect,
   ChangeEventHandler,
-  KeyboardEventHandler
+  KeyboardEventHandler,
+  FC
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSearchQueryAction } from "../../headline";
 import "./Search.css";
 import { AppState } from "../../../store";
+import { StockProps } from "../../headline/components/Headline";
+import { updateStockAction } from "../../../actions";
 
-export const Search = ({ updateStock }: any) => {
+export const Search: FC = () => {
   const dispatch = useDispatch();
   const filteredSymbols = useSelector(
     (state: AppState) => state.headlineData.selectedCompanySymbols
@@ -49,6 +52,8 @@ export const Search = ({ updateStock }: any) => {
     name: string;
     symbol: string;
   };
+
+  const updateStock = (stock: StockProps) => dispatch(updateStockAction(stock));
 
   const selectOption = (data: StockDataProps) => {
     updateStock(data);

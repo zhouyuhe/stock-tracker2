@@ -1,17 +1,23 @@
-import React from "react";
+import React, { FC } from "react";
 import moment from "moment";
 import "./MarketStatus.css";
+import { KeyStatsData } from "../../key-stats/redux/actions";
 
+type MarketStatusProps = {
+  stock: any;
+  keyStats: KeyStatsData | null;
+};
 const marketSign = (value: number) =>
   value === null ? "market---moon" : "market---sun";
 const formatDate = (date: Date) => new Date(date);
-export const MarketStatus = ({ stock, keyStats }: any) => {
+export const MarketStatus: FC<MarketStatusProps> = ({ stock, keyStats }) => {
   const UKTime = formatDate(stock.latestUpdate);
   const USTime = formatDate(UKTime).toLocaleString("en-US", {
     timeZone: "America/New_York"
   });
   const correctFormat = moment(new Date(USTime)).format("lll");
-  const marketStatus = keyStats.open === null ? "Market Closed" : "Market Open";
+  const marketStatus =
+    keyStats && keyStats.open === null ? "Market Closed" : "Market Open";
 
   return (
     <div className="market">
@@ -19,7 +25,9 @@ export const MarketStatus = ({ stock, keyStats }: any) => {
         <span className="market__text">
           Real-Time Price as of {correctFormat} EST
         </span>{" "}
-        <span className={marketSign(keyStats.open)}> {marketStatus}</span>
+        {keyStats && (
+          <span className={marketSign(keyStats.open)}> {marketStatus}</span>
+        )}
       </p>
     </div>
   );
