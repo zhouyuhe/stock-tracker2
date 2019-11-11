@@ -15,11 +15,9 @@ export const Headline = () => {
   const { selectedKeyStats } = useSelector(
     (state: AppState) => state.keyStatsData
   );
-  const {
-    selectedSearch,
-    enteredSearchQuery,
-    selectedCompanySymbols
-  } = useSelector((state: AppState) => state.headlineData);
+  const { selectedSearch } = useSelector(
+    (state: AppState) => state.headlineData
+  );
 
   const dispatch = useDispatch();
 
@@ -38,8 +36,6 @@ export const Headline = () => {
       <img className="header__logo" src={logo} alt="Adaptive Logo" />
       <div className="search-bar__wrapper">
         <Search
-          searchQuery={enteredSearchQuery}
-          symbol={selectedCompanySymbols}
           updateStock={(stock: string) => dispatch(updateStockAction(stock))}
         />
         {selectedSearch && <StockTicker stock={selectedStockTicker} />}
