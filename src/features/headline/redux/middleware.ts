@@ -3,19 +3,18 @@ import {
   updateCompanySymbolsAction,
   updateSearchAction,
   SearchDataProps,
-  CompanySymbolData,
-  UpdateSearchAction,
-  UpdateCompanySymbolAction
+  CompanySymbolData
 } from "./actions";
 import { UPDATE_SEARCH_QUERY } from "./constants";
 import { SocketService } from "../../../services/socketService";
 import { Middleware, AnyAction } from "redux";
 import { HeadlineState } from "./reducer";
 
-type T1 = (search: SearchDataProps) => AnyAction;
-type T2 = (company: CompanySymbolData[]) => AnyAction;
-// type T3<T> = <T extends {}>(input: T) => AnyAction;
-type DataToFetch = { name: string; action: T1 | T2 };
+type TypeOfAction<T> = (input: T) => AnyAction;
+type DataToFetch = {
+  name: string;
+  action: TypeOfAction<SearchDataProps> | TypeOfAction<CompanySymbolData[]>;
+};
 
 const dataTofetch: DataToFetch[] = [
   { name: "sectorInformation", action: updateSearchAction },
@@ -34,7 +33,7 @@ export const headlineMiddleware: HeadlineMiddleware = ({
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     dataTofetch.forEach(item => {
-      socket.on(item.name, (payload: any) => {
+      socket.on(item.name, (payload: SearchDataProps & CompanySymbolData[]) => {
         store.dispatch(item.action(payload));
       });
     });
