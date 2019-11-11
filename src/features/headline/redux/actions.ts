@@ -3,7 +3,7 @@ import {
   UPDATE_COMPANY_SYMBOLS,
   UPDATE_SEARCH_QUERY
 } from "./constants";
-import { ActionWithPayload } from "../../../store/actions";
+import { ActionWithPayload } from "store/actions";
 
 export type SearchDataProps = {
   primaryExchange: string;

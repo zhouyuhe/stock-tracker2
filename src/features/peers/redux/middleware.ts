@@ -1,8 +1,8 @@
-import { BOOTSTRAP } from "../../../store/constants";
+import { BOOTSTRAP } from "store/constants";
 import { updateTopPeersAction, PeersData } from "./actions";
-import { SocketService } from "../../../services/socketService";
+import { SocketService } from "services/socketService";
 import { Middleware } from "redux";
-import { AppState } from "../../../store";
+import { AppState } from "store";
 
 type Dependencies = {
   socketService: SocketService;

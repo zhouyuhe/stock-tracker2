@@ -1,8 +1,8 @@
-import { RESET } from "../../../store/constants";
+import { RESET } from "store/constants";
 import { UPDATE_LATEST_NEWS } from "./constants";
 import { LatestNewsData, UpdateLatestNewsAction } from "./actions";
 import { Reducer } from "redux";
-import { ResetAction } from "../../../store/actions";
+import { ResetAction } from "store/actions";
 
 export type LatestNewsState = {
   selectedLatestNews: LatestNewsData[] | null;

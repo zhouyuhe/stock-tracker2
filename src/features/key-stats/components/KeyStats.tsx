@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Loading } from "../../loading";
 import "./KeyStats.css";
-import { AppState } from "../../../store";
+import { AppState } from "store";
 import { KeyStatsData } from "../redux/actions";
 import { ErrorMessage } from "../../error-message";
 

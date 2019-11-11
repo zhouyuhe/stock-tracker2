@@ -1,8 +1,8 @@
-import { RESET } from "../../../store/constants";
+import { RESET } from "store/constants";
 import { UPDATE_KEY_STATS } from "./constants";
 import { Reducer } from "redux";
 import { UpdateKeyStatsAction, KeyStatsData } from "./actions";
-import { ResetAction } from "../../../store/actions";
+import { ResetAction } from "store/actions";
 
 export type KeyStatsState = {
   selectedKeyStats: KeyStatsData | null;

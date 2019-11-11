@@ -1,5 +1,5 @@
 import { UPDATE_COMPANY_OVERVIEW } from "./constants";
-import { ActionWithPayload } from "../../../store/actions";
+import { ActionWithPayload } from "store/actions";
 
 export type CompanyData = {
   companyName: string;

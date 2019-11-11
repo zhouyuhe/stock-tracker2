@@ -1,8 +1,8 @@
-import { BOOTSTRAP } from "../../../store/constants";
+import { BOOTSTRAP } from "store/constants";
 import { updateKeyStatsAction, KeyStatsData } from "./actions";
-import { SocketService } from "../../../services/socketService";
+import { SocketService } from "services/socketService";
 import { Middleware } from "redux";
-import { AppState } from "../../../store";
+import { AppState } from "store";
 
 export type Dependencies = {
   socketService: SocketService;

@@ -6,9 +6,9 @@ import {
   CompanySymbolData
 } from "./actions";
 import { UPDATE_SEARCH_QUERY } from "./constants";
-import { SocketService } from "../../../services/socketService";
+import { SocketService } from "services/socketService";
 import { Middleware, AnyAction } from "redux";
-import { AppState } from "../../../store";
+import { AppState } from "store";
 
 type TypeOfAction<T> = (input: T) => AnyAction;
 type DataToFetch = {

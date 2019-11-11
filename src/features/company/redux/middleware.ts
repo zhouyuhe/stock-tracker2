@@ -1,7 +1,7 @@
 import { updateCompanyOverviewAction, CompanyData } from "./actions";
-import { SocketService } from "../../../services/socketService";
+import { SocketService } from "services/socketService";
 import { Middleware } from "redux";
-import { AppState, BOOTSTRAP } from "../../../store";
+import { AppState, BOOTSTRAP } from "store";
 export type Dependencies = {
   socketService: SocketService;
 };

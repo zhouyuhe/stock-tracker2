@@ -9,9 +9,9 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 import { updateSearchQueryAction } from "../../headline";
 import "./Search.css";
-import { AppState } from "../../../store";
+import { AppState } from "store";
 import { StockProps } from "../../headline/components/Headline";
-import { updateStockAction } from "../../../actions";
+import { updateStockAction } from "actions";
 
 export const Search: FC = () => {
   const dispatch = useDispatch();
