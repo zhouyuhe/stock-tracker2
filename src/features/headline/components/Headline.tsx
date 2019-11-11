@@ -7,7 +7,6 @@ import { StockTicker } from "../../stock-ticker";
 import { MarketStatus } from "../../market-status";
 import "./Headline.css";
 import { AppState } from "../../../store";
-import { SearchDataProps } from "../redux/actions";
 
 export const Headline = () => {
   const { selectedStockTicker } = useSelector(
@@ -24,13 +23,15 @@ export const Headline = () => {
 
   const dispatch = useDispatch();
 
-  const labels =
-    selectedSearch &&
-    Object.keys(selectedSearch)
-      .filter(
-        key => key !== "companyName" && key !== "symbol" && selectedSearch[key]
-      )
-      .map(key => <li key={key}>{selectedSearch[key]}</li>);
+  const labels = selectedSearch && (
+    <ul>
+      {selectedSearch.primaryExchange && (
+        <li>{selectedSearch.primaryExchange}</li>
+      )}
+      {selectedSearch.currency && <li>{selectedSearch.currency}</li>}
+      {selectedSearch.sector && <li>{selectedSearch.sector}</li>}
+    </ul>
+  );
 
   return (
     <div className="header">
