@@ -1,12 +1,12 @@
 import { UPDATE_COMPANY_OVERVIEW } from "../constants";
 import { companyOverviewReducer, CompanyState } from "../reducer";
-import { UpdateCompanyOverviewAction } from "../actions";
+import { UpdateCompanyOverviewAction, CompanyData } from "../actions";
 
 describe("with an UPDATE_COMPANY_OVERVIEW action", () => {
   let newState: CompanyState;
 
   beforeAll(() => {
-    const initialState = {
+    const initialState: CompanyState = {
       selectedCompanyOverview: null
     };
     const action: UpdateCompanyOverviewAction = {

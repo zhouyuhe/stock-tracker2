@@ -30,9 +30,9 @@ const tenors: Tenor[] = [
 
 const yaxisFormat = (item: number) => item.toFixed(2);
 
-const formatDate = (isoDate: string, ChartRange: string) => {
+const formatDate = (isoDate: string, chartRange: string) => {
   const date = new Date(isoDate);
-  switch (ChartRange) {
+  switch (chartRange) {
     case "max":
     case "5y":
     case "1y":
@@ -125,10 +125,10 @@ export const Chart = () => {
           />
           <Tooltip />
           <ReferenceLine
-            y={selectedStockTicker.latestPrice}
+            y={selectedStockTicker && selectedStockTicker.latestPrice}
             label={
               <Label
-                value={selectedStockTicker.latestPrice}
+                value={selectedStockTicker && selectedStockTicker.latestPrice}
                 position="right"
                 fill="#e95656"
               />

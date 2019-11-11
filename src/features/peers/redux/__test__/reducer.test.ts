@@ -6,7 +6,7 @@ describe("with an UPDATE_TOP_PEERS action", () => {
   let newState: PeersState;
 
   beforeAll(() => {
-    const initialState = {
+    const initialState: PeersState = {
       selectedTopPeers: null
     };
     const action: UpdateTopPeersAction = {

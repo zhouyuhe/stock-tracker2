@@ -4,7 +4,7 @@ export const bootstrap = (): BootstrapAction => ({ type: BOOTSTRAP });
 export type BootstrapAction = Action<typeof BOOTSTRAP>;
 export type ResetAction = Action<typeof RESET>;
 
-export type Action<Type extends string> = { type: Type };
-export type ActionWithPayload<Type extends string, Payload> = Action<Type> & {
-  payload: Payload;
+export type Action<T extends string> = { type: T };
+export type ActionWithPayload<T extends string, P> = Action<T> & {
+  payload: P;
 };

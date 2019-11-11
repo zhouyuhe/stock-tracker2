@@ -6,7 +6,7 @@ describe("with an UPDATE_LATEST_NEWS action", () => {
   let newState: LatestNewsState;
 
   beforeAll(() => {
-    const initialState = {
+    const initialState: LatestNewsState = {
       selectedLatestNews: null
     };
     const action: UpdateLatestNewsAction = {
