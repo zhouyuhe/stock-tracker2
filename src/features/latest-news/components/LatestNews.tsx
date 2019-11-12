@@ -6,7 +6,7 @@ import { ErrorMessage } from "../../error-message";
 import "./LatestNews.css";
 import { AppState } from "store";
 
-const timeFormat = (date: string) => moment(date).fromNow();
+const timeFormat = (date: Date) => moment(date).fromNow();
 
 export const LatestNews = () => {
   const { selectedLatestNews } = useSelector(

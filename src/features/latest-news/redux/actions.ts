@@ -4,7 +4,7 @@ import { ActionWithPayload } from "store/actions";
 export type LatestNewsData = {
   headline: string;
   source: string;
-  date: string;
+  date: Date;
   url: string;
 };
 

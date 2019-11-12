@@ -14,9 +14,8 @@ export const Company = () => {
   const renderCompanyComponent = () => (
     <>
       <div className="company-overview__title">
-        {`${(selectedCompanyOverview !== null &&
-          selectedCompanyOverview.companyName) ||
-          "N/A"} (${(selectedCompanyOverview !== null &&
+        {`${(selectedCompanyOverview && selectedCompanyOverview.companyName) ||
+          "N/A"} (${(selectedCompanyOverview &&
           selectedCompanyOverview.symbol) ||
           "N/A"})`}
       </div>
@@ -25,18 +24,15 @@ export const Company = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="company-overview__website"
-          href={`${selectedCompanyOverview !== null &&
-            selectedCompanyOverview.website}`}
+          href={`${selectedCompanyOverview && selectedCompanyOverview.website}`}
         >
-          {(selectedCompanyOverview !== null &&
-            selectedCompanyOverview.website) ||
+          {(selectedCompanyOverview && selectedCompanyOverview.website) ||
             "N/A"}
         </a>
       </div>
       <div className="company-overview__text">
         <p>
-          {(selectedCompanyOverview !== null &&
-            selectedCompanyOverview.description) ||
+          {(selectedCompanyOverview && selectedCompanyOverview.description) ||
             "N/A"}
         </p>
       </div>

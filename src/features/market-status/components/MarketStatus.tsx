@@ -11,6 +11,7 @@ type MarketStatusProps = {
 const marketSign = (value: number) =>
   value === null ? "market---moon" : "market---sun";
 const formatDate = (date: Date) => new Date(date);
+
 export const MarketStatus: FC<MarketStatusProps> = ({ stock, keyStats }) => {
   const UKTime = stock && formatDate(stock.latestUpdate);
   const USTime =
