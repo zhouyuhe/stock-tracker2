@@ -48,14 +48,9 @@ export const Search: FC = () => {
     }
   };
 
-  type StockDataProps = {
-    name: string;
-    symbol: string;
-  };
-
   const updateStock = (stock: StockProps) => dispatch(updateStockAction(stock));
 
-  const selectOption = (data: StockDataProps) => {
+  const selectOption = (data: StockProps) => {
     updateStock(data);
     toggleIsOpen(false);
     if (inputSelect.current) {

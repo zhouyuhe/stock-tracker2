@@ -10,15 +10,9 @@ type MarketStatusProps = {
 };
 const marketSign = (value: number) =>
   value === null ? "market---moon" : "market---sun";
-const formatDate = (date: Date) => new Date(date);
+
 export const MarketStatus: FC<MarketStatusProps> = ({ stock, keyStats }) => {
-  const UKTime = stock && formatDate(stock.latestUpdate);
-  const USTime =
-    UKTime &&
-    formatDate(UKTime).toLocaleString("en-US", {
-      timeZone: "America/New_York"
-    });
-  const correctFormat = USTime && moment(new Date(USTime)).format("lll");
+  const correctFormat = stock && moment(stock.latestUpdate).format("lll");
   const marketStatus =
     keyStats && keyStats.open === null ? "Market Closed" : "Market Open";
 
