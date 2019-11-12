@@ -17,33 +17,26 @@ import { ErrorMessage } from "../../error-message";
 import { AppState } from "store";
 import "./Chart.css";
 
-type Tenor = { value: string; label: string };
+export type ChartRange = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX";
 
-const tenors: Tenor[] = [
-  { value: "1d", label: "1D" },
-  { value: "5d", label: "5D" },
-  { value: "1m", label: "1M" },
-  { value: "1y", label: "1Y" },
-  { value: "5y", label: "5Y" },
-  { value: "max", label: "MAX" }
-];
+const chartRange: ChartRange[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
 
 const yaxisFormat = (item: number) => item.toFixed(2);
 
-const formatDate = (isoDate: string, chartRange: string) => {
+const formatDate = (isoDate: string, chartRange: ChartRange) => {
   const date = new Date(isoDate);
   switch (chartRange) {
-    case "max":
-    case "5y":
-    case "1y":
-    case "1m":
+    case "MAX":
+    case "5Y":
+    case "1Y":
+    case "1M":
       return Intl.DateTimeFormat("en-US", {
         year: "2-digit",
         month: "short"
       }).format(date);
-    case "5d":
+    case "5D":
       return Intl.DateTimeFormat("en-US", { weekday: "short" }).format(date);
-    case "1d":
+    case "1D":
       return Intl.DateTimeFormat("en-US", {
         hour: "2-digit",
         minute: "2-digit"
@@ -61,7 +54,7 @@ export const Chart = () => {
   const { selectedStockTicker } = useSelector(
     (state: AppState) => state.stockTickerData
   );
-  const updateChartRange = (stock: string) =>
+  const updateChartRange = (stock: ChartRange) =>
     dispatch(updateChartAction(stock));
 
   const chartData = (selectedChartData || []).map(data => ({
@@ -73,18 +66,18 @@ export const Chart = () => {
     <>
       <div className="chart__wrapper">
         {chartData.length !== 0 ? (
-          tenors.map(({ value, label }) => {
+          chartRange.map(value => {
             const activeClass =
               selectedChartRange === value ? "chart__button--active" : "";
 
             return (
               <button
-                key={label}
+                key={value}
                 className={`chart__button ${activeClass}`}
                 onClick={() => updateChartRange(value)}
                 value={value}
               >
-                {label}
+                {value}
               </button>
             );
           })

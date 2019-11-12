@@ -3,14 +3,15 @@ import { ChartActions, ChartData } from "./actions";
 import { Reducer } from "redux";
 import { ResetAction } from "store/actions";
 import { RESET } from "store/constants";
+import { ChartRange } from "../components/Chart";
 
 export type ChartState = {
-  selectedChartRange: string;
+  selectedChartRange: ChartRange;
   selectedChartData: ChartData[] | null;
 };
 
 const initialState: ChartState = {
-  selectedChartRange: "5y",
+  selectedChartRange: "5Y",
   selectedChartData: null
 };
 
