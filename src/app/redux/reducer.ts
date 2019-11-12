@@ -6,7 +6,7 @@ import { ResetAction } from "store/actions";
 import { UPDATE_SELECTED_STOCK } from "../redux/constants";
 
 export type StockState = {
-  selectedStock: StockProps | undefined;
+  readonly selectedStock: StockProps | undefined;
 };
 const initialState: StockState = {
   selectedStock: undefined

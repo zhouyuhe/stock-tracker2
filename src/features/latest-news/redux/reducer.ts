@@ -5,7 +5,7 @@ import { Reducer } from "redux";
 import { ResetAction } from "store/actions";
 
 export type LatestNewsState = {
-  selectedLatestNews: LatestNewsData[] | null;
+  readonly selectedLatestNews: LatestNewsData[] | null;
 };
 
 const initialState = { selectedLatestNews: null };

@@ -9,9 +9,9 @@ import { Reducer } from "redux";
 import { ResetAction } from "store/actions";
 
 export type HeadlineState = {
-  selectedSearch: SearchDataProps | null;
-  enteredSearchQuery: string;
-  selectedCompanySymbols: CompanySymbolData[];
+  readonly selectedSearch: SearchDataProps | null;
+  readonly enteredSearchQuery: string;
+  readonly selectedCompanySymbols: CompanySymbolData[];
 };
 const initialState: HeadlineState = {
   selectedSearch: null,

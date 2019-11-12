@@ -4,7 +4,9 @@ import { UpdateCompanyOverviewAction, CompanyData } from "./actions";
 import { ResetAction } from "store/actions";
 import { Reducer } from "redux";
 
-export type CompanyState = { selectedCompanyOverview: CompanyData | null };
+export type CompanyState = {
+  readonly selectedCompanyOverview: CompanyData | null;
+};
 const initialState = { selectedCompanyOverview: null };
 
 export const companyOverviewReducer: Reducer<
