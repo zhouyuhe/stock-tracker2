@@ -1,5 +1,5 @@
 import { UPDATE_CHART_RANGE, UPDATE_CHART_DATA } from "./constants";
-import { ActionWithPayload } from "store/actions";
+import { ActionWithPayload } from "store";
 import { ChartRange } from "../components/Chart";
 export type ChartData = {
   date: string;

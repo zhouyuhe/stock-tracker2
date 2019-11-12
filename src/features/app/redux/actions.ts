@@ -1,6 +1,6 @@
 import { UPDATE_SELECTED_STOCK } from "../redux/constants";
-import { ActionWithPayload } from "store/actions";
 import { StockProps } from "../../headline/components/Headline";
+import { ActionWithPayload } from "store/utilities";
 
 export type UpdateStockAction = ActionWithPayload<
   typeof UPDATE_SELECTED_STOCK,

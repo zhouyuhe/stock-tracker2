@@ -1,5 +1,5 @@
 import { UPDATE_KEY_STATS } from "./constants";
-import { ActionWithPayload } from "store/actions";
+import { ActionWithPayload } from "store";
 
 export type KeyStatsData = {
   companyName: string;
