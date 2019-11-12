@@ -12,6 +12,8 @@ import "./Search.css";
 import { AppState } from "store";
 import { StockProps } from "../../headline/components/Headline";
 import { updateStockAction } from "app/redux/actions";
+import { CompanySymbolData } from "features/headline/redux/actions";
+import { SearchBox } from "./SearchBox";
 
 export const Search: FC = () => {
   const dispatch = useDispatch();
@@ -74,69 +76,24 @@ export const Search: FC = () => {
     });
   };
 
-  const options =
-    filteredSymbols !== undefined && filteredSymbols.length > 0 ? (
-      filteredSymbols.map(data => {
-        return (
-          <tr onClick={() => selectOption(data)} key={data.symbol}>
-            <td>
-              <span className="company-symbol__dropdown">{data.symbol}</span>
-            </td>
-            <td>
-              <span className="company-name__dropdown">{data.name}</span>
-              <span className="company-exchange__dropdown">
-                {data.exchange}
-              </span>
-            </td>
-          </tr>
-        );
-      })
-    ) : (
-      <tr>
-        <td>
-          <span className="company-name__dropdown">Loading...</span>
-        </td>
-      </tr>
-    );
-
-  // const options = () => {
-
-  //   if (filteredSymbols === undefined) {
-  //     return (
-  //       <tr>
-  //         <td>
-  //           <span className="company-name__dropdown">Loading...</span>
-  //         </td>
-  //       </tr>
-  //     )
-  //   } else if (filteredSymbols.length === 0) {
-  //     return (
-  //       <tr>
-  //         <td>
-  //           <span className="company-name__dropdown">Symbol Not Found</span>
-  //         </td>
-  //       </tr>
-  //     )
-  //   } else {
-  //     return (
-  //       filteredSymbols.map(data => {
-  //         return (
-  //           <tr onClick={() => selectOption(data)} key={data.symbol}>
-  //             <td>
-  //               <span className="company-symbol__dropdown">{data.symbol}</span>
-  //             </td>
-  //             <td>
-  //               <span className="company-name__dropdown">{data.name}</span>
-  //               <span className="company-exchange__dropdown">
-  //                 {data.exchange}
-  //               </span>
-  //             </td>
-  //           </tr>
-  //         );
-  //       })
-  //     )
-  //   }
-  // }
+  const options = (data: CompanySymbolData[] | undefined) => {
+    if (data !== undefined && data.length > 0) {
+      return data.map(data => (
+        <tr onClick={() => selectOption(data)} key={data.symbol}>
+          <td>
+            <span className="company-symbol__dropdown">{data.symbol}</span>
+          </td>
+          <td>
+            <span className="company-name__dropdown">{data.name}</span>
+            <span className="company-exchange__dropdown">{data.exchange}</span>
+          </td>
+        </tr>
+      ));
+    } else if (data === undefined) {
+      return <SearchBox message="Loading..." />;
+    }
+    return <SearchBox message="Data not found" />;
+  };
 
   useEffect(() => {
     toggleIsOpen(filteredSymbols !== undefined);
@@ -172,7 +129,7 @@ export const Search: FC = () => {
         style={{ display: isOpen ? "block" : "none" }}
         tabIndex={0}
       >
-        <tbody>{options}</tbody>
+        <tbody>{options(filteredSymbols)}</tbody>
       </table>
     </>
   );
