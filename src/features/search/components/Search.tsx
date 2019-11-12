@@ -76,20 +76,27 @@ export const Search: FC = () => {
     });
   };
 
-  const options = (data: CompanySymbolData[] | undefined) => {
-    if (data !== undefined && data.length > 0) {
-      return data.map(data => (
-        <tr onClick={() => selectOption(data)} key={data.symbol}>
+  const options = (filteredCompanyData: CompanySymbolData[] | undefined) => {
+    if (filteredCompanyData !== undefined && filteredCompanyData.length > 0) {
+      return filteredCompanyData.map(filteredData => (
+        <tr
+          onClick={() => selectOption(filteredData)}
+          key={filteredData.symbol}
+        >
           <td>
-            <span className="company-symbol__dropdown">{data.symbol}</span>
+            <span className="company-symbol__dropdown">
+              {filteredData.symbol}
+            </span>
           </td>
           <td>
-            <span className="company-name__dropdown">{data.name}</span>
-            <span className="company-exchange__dropdown">{data.exchange}</span>
+            <span className="company-name__dropdown">{filteredData.name}</span>
+            <span className="company-exchange__dropdown">
+              {filteredData.exchange}
+            </span>
           </td>
         </tr>
       ));
-    } else if (data === undefined) {
+    } else if (filteredCompanyData === undefined) {
       return <SearchBox message="Loading..." />;
     }
     return <SearchBox message="Data not found" />;
