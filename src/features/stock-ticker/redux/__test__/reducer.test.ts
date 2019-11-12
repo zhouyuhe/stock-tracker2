@@ -13,7 +13,7 @@ describe("with an UPDATE_STOCK_TICKER action", () => {
       type: UPDATE_STOCK_TICKER,
       payload: {
         latestPrice: 1,
-        latestUpdate: new Date("2014-10-10"),
+        latestUpdate: 12345,
         change: 2,
         changePercent: 3
       }
@@ -24,7 +24,7 @@ describe("with an UPDATE_STOCK_TICKER action", () => {
   it('it updates stock to "Stock"', () => {
     expect(newState.selectedStockTicker).toEqual({
       latestPrice: 1,
-      latestUpdate: new Date("2014-10-10"),
+      latestUpdate: 12345,
       change: 2,
       changePercent: 3
     });

@@ -11,16 +11,14 @@ describe("with an UPDATE_LATEST_NEWS action", () => {
     };
     const action: UpdateLatestNewsAction = {
       type: UPDATE_LATEST_NEWS,
-      payload: [
-        { headline: "hi", source: "FT", date: "2012-02-09", url: "www.ft.com" }
-      ]
+      payload: [{ headline: "hi", source: "FT", date: 121, url: "www.ft.com" }]
     };
     newState = latestNewsReducer(initialState, action);
   });
 
   it('it updates the latest news to "NEWS"', () => {
     expect(newState.selectedLatestNews).toEqual([
-      { headline: "hi", source: "FT", date: "2012-02-09", url: "www.ft.com" }
+      { headline: "hi", source: "FT", date: 121, url: "www.ft.com" }
     ]);
   });
 });

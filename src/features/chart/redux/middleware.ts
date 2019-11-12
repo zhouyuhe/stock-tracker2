@@ -17,13 +17,13 @@ export const chartMiddleware: ChartMiddleware = ({
   socketService
 }) => store => next => action => {
   if (action.type === UPDATE_CHART_RANGE) {
-    socketService
-      .get()
-      .emit(
-        "timeRange",
-        store.getState().stockData.selectedStock!.symbol,
-        action.payload
-      );
+    const {
+      stockData: { selectedStock }
+    } = store.getState();
+    if (selectedStock === undefined) {
+      throw new Error("selectedStock is undefined");
+    }
+    socketService.get().emit("timeRange", selectedStock.symbol, action.payload);
   }
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
