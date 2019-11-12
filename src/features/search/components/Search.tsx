@@ -39,9 +39,9 @@ export const Search: FC = () => {
   }) => {
     const symbolUpper = symbol.toUpperCase();
     if (key === "Enter") {
-      const selectedDatum = filteredSymbols.find(
-        datum => datum.symbol === symbolUpper
-      );
+      const selectedDatum =
+        filteredSymbols &&
+        filteredSymbols.find(datum => datum.symbol === symbolUpper);
       if (selectedDatum) {
         selectOption({ symbol, name: selectedDatum.name });
       }
@@ -75,7 +75,7 @@ export const Search: FC = () => {
   };
 
   const options =
-    filteredSymbols.length > 0 ? (
+    filteredSymbols !== undefined && filteredSymbols.length > 0 ? (
       filteredSymbols.map(data => {
         return (
           <tr onClick={() => selectOption(data)} key={data.symbol}>
@@ -94,14 +94,53 @@ export const Search: FC = () => {
     ) : (
       <tr>
         <td>
-          <span className="company-name__dropdown">No symbols found</span>
+          <span className="company-name__dropdown">Loading...</span>
         </td>
       </tr>
     );
 
+  // const options = () => {
+
+  //   if (filteredSymbols === undefined) {
+  //     return (
+  //       <tr>
+  //         <td>
+  //           <span className="company-name__dropdown">Loading...</span>
+  //         </td>
+  //       </tr>
+  //     )
+  //   } else if (filteredSymbols.length === 0) {
+  //     return (
+  //       <tr>
+  //         <td>
+  //           <span className="company-name__dropdown">Symbol Not Found</span>
+  //         </td>
+  //       </tr>
+  //     )
+  //   } else {
+  //     return (
+  //       filteredSymbols.map(data => {
+  //         return (
+  //           <tr onClick={() => selectOption(data)} key={data.symbol}>
+  //             <td>
+  //               <span className="company-symbol__dropdown">{data.symbol}</span>
+  //             </td>
+  //             <td>
+  //               <span className="company-name__dropdown">{data.name}</span>
+  //               <span className="company-exchange__dropdown">
+  //                 {data.exchange}
+  //               </span>
+  //             </td>
+  //           </tr>
+  //         );
+  //       })
+  //     )
+  //   }
+  // }
+
   useEffect(() => {
-    toggleIsOpen(filteredSymbols.length !== 0);
-  }, [filteredSymbols.length]);
+    toggleIsOpen(filteredSymbols !== undefined);
+  }, [filteredSymbols]);
 
   return (
     <>
