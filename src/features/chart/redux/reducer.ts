@@ -6,8 +6,8 @@ import { RESET } from "store/constants";
 import { ChartRange } from "../components/Chart";
 
 export type ChartState = {
-  selectedChartRange: ChartRange;
-  selectedChartData: ChartData[] | null;
+  readonly selectedChartRange: ChartRange;
+  readonly selectedChartData: ChartData[] | null;
 };
 
 const initialState: ChartState = {

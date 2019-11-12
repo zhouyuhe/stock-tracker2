@@ -5,7 +5,7 @@ import { UpdateStockTickerAction, StockTickerData } from "./actions";
 import { ResetAction } from "store/actions";
 
 export type StockTickerState = {
-  selectedStockTicker: StockTickerData | undefined;
+  readonly selectedStockTicker: StockTickerData | undefined;
 };
 const initialState: StockTickerState = { selectedStockTicker: undefined };
 export const stockTickerReducer: Reducer<
