@@ -19,7 +19,7 @@ import "./Chart.css";
 
 export type ChartRange = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX";
 
-const tenors: ChartRange[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
+const chartRange: ChartRange[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
 
 const yaxisFormat = (item: number) => item.toFixed(2);
 
@@ -66,7 +66,7 @@ export const Chart = () => {
     <>
       <div className="chart__wrapper">
         {chartData.length !== 0 ? (
-          tenors.map(value => {
+          chartRange.map(value => {
             const activeClass =
               selectedChartRange === value ? "chart__button--active" : "";
 
