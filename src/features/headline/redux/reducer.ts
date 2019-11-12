@@ -11,12 +11,12 @@ import { ResetAction } from "store/actions";
 export type HeadlineState = {
   selectedSearch: SearchDataProps | null;
   enteredSearchQuery: string;
-  selectedCompanySymbols: CompanySymbolData[];
+  selectedCompanySymbols: CompanySymbolData[] | undefined;
 };
 const initialState: HeadlineState = {
   selectedSearch: null,
   enteredSearchQuery: "",
-  selectedCompanySymbols: []
+  selectedCompanySymbols: undefined
 };
 
 export const headlineReducer: Reducer<
