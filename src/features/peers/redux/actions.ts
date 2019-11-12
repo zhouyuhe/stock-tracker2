@@ -1,5 +1,5 @@
 import { UPDATE_TOP_PEERS } from "./constants";
-import { ActionWithPayload } from "store/actions";
+import { ActionWithPayload } from "store";
 
 export type PeersData = {
   symbol: string;

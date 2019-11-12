@@ -10,7 +10,7 @@ export type LatestNewsState = {
 
 const initialState = { selectedLatestNews: null };
 export const latestNewsReducer: Reducer<
-  LatestNewsState,
+  Readonly<LatestNewsState>,
   UpdateLatestNewsAction | ResetAction
 > = (state = initialState, action) => {
   switch (action.type) {

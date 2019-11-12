@@ -8,7 +8,7 @@ export type CompanyState = { selectedCompanyOverview: CompanyData | null };
 const initialState = { selectedCompanyOverview: null };
 
 export const companyOverviewReducer: Reducer<
-  CompanyState,
+  Readonly<CompanyState>,
   UpdateCompanyOverviewAction | ResetAction
 > = (state = initialState, action) => {
   switch (action.type) {

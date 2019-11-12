@@ -1,8 +1,8 @@
-import { UPDATE_SELECTED_STOCK } from "./store/constants";
-import { resetAction } from "./store/actions";
-import { SocketService } from "./services/socketService";
+import { UPDATE_SELECTED_STOCK } from "../redux/constants";
+import { resetAction } from "store/actions";
+import { SocketService } from "services/socketService";
 import { Middleware } from "redux";
-import { AppState } from "./store";
+import { AppState } from "store";
 
 export type Dependencies = {
   socketService: SocketService;

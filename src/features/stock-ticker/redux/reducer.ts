@@ -9,7 +9,7 @@ export type StockTickerState = {
 };
 const initialState: StockTickerState = { selectedStockTicker: undefined };
 export const stockTickerReducer: Reducer<
-  StockTickerState,
+  Readonly<StockTickerState>,
   UpdateStockTickerAction | ResetAction
 > = (state = initialState, action) => {
   switch (action.type) {
