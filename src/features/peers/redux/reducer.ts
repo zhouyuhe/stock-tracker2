@@ -9,7 +9,7 @@ export type PeersState = {
 };
 const initialState = { selectedTopPeers: null };
 export const peerReducer: Reducer<
-  PeersState,
+  Readonly<PeersState>,
   UpdateTopPeersAction | ResetAction
 > = (state = initialState, action) => {
   switch (action.type) {

@@ -1,6 +1,6 @@
-import { UPDATE_SELECTED_STOCK } from "./store";
-import { stockReducer, StockState } from "./reducer";
-import { UpdateStockAction } from "./actions";
+import { UPDATE_SELECTED_STOCK } from "../constants";
+import { stockReducer, StockState } from "../reducer";
+import { UpdateStockAction } from "../actions";
 
 describe("with an UPDATE_SELECTED_STOCK action", () => {
   let newState: StockState;

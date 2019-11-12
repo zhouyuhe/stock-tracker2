@@ -20,7 +20,7 @@ const initialState: HeadlineState = {
 };
 
 export const headlineReducer: Reducer<
-  HeadlineState,
+  Readonly<HeadlineState>,
   HeadlineAction | ResetAction
 > = (state = initialState, action) => {
   switch (action.type) {

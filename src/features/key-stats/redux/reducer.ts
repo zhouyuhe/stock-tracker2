@@ -9,7 +9,7 @@ export type KeyStatsState = {
 };
 const initialState: KeyStatsState = { selectedKeyStats: null };
 export const keyStatsReducer: Reducer<
-  KeyStatsState,
+  Readonly<KeyStatsState>,
   UpdateKeyStatsAction | ResetAction
 > = (state = initialState, action) => {
   switch (action.type) {

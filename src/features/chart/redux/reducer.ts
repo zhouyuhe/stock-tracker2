@@ -15,10 +15,10 @@ const initialState: ChartState = {
   selectedChartData: null
 };
 
-export const chartReducer: Reducer<ChartState, ChartActions | ResetAction> = (
-  state = initialState,
-  action
-) => {
+export const chartReducer: Reducer<
+  Readonly<ChartState>,
+  ChartActions | ResetAction
+> = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_CHART_RANGE:
       return {

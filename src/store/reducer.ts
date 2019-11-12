@@ -5,7 +5,7 @@ import { keyStatsReducer } from "../features/key-stats";
 import { stockTickerReducer } from "../features/stock-ticker";
 import { chartReducer } from "../features/chart";
 import { headlineReducer } from "../features/headline";
-import { stockReducer } from "../reducer";
+import { stockReducer } from "../features/app/redux/reducer";
 import { companyOverviewReducer } from "../features/company/redux/reducer";
 
 export type AppState = ReturnType<typeof combinedReducer>;

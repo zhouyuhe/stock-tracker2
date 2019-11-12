@@ -8,7 +8,7 @@ import { latestNewsMiddleware } from "../features/latest-news";
 import { topPeersMiddleware } from "../features/peers";
 import { headlineMiddleware } from "../features/headline";
 import { stockTickerMiddleware } from "../features/stock-ticker";
-import { stockMiddleware } from "../middleware";
+import { stockMiddleware } from "../features/app/redux/middleware";
 
 declare global {
   interface Window {

@@ -11,7 +11,7 @@ import { updateSearchQueryAction } from "../../headline";
 import "./Search.css";
 import { AppState } from "store";
 import { StockProps } from "../../headline/components/Headline";
-import { updateStockAction } from "actions";
+import { updateStockAction } from "features/app/redux/actions";
 
 export const Search: FC = () => {
   const dispatch = useDispatch();
