@@ -4,7 +4,7 @@ import { SocketService } from "services/socketService";
 import { Middleware } from "redux";
 import { AppState } from "store";
 
-export type Dependencies = {
+type Dependencies = {
   socketService: SocketService;
 };
 
