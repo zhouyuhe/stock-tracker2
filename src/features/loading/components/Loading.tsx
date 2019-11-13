@@ -6,12 +6,13 @@ type LoadingProps = {
   render: () => JSX.Element;
 };
 export const Loading = ({ loaded, render }: LoadingProps) => {
-  if (!loaded) {
-    return (
-      <div className="center-spinner">
-        <div className="loading-spinner"></div>
-      </div>
-    );
+  if (loaded) {
+    return render();
   }
-  return render();
+
+  return (
+    <div className="center-spinner">
+      <div className="loading-spinner"></div>
+    </div>
+  );
 };

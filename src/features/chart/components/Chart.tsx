@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   AreaChart,
   Area,
@@ -46,7 +46,7 @@ const formatDate = (isoDate: string, chartRange: ChartRange) => {
   }
 };
 
-export const Chart = () => {
+export const Chart: FC = () => {
   const dispatch = useDispatch();
   const { selectedChartData, selectedChartRange } = useSelector(
     (state: AppState) => state.chartData

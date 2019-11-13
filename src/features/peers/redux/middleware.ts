@@ -8,12 +8,9 @@ type Dependencies = {
   socketService: SocketService;
 };
 
-export type TopPeersMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-export const topPeersMiddleware: TopPeersMiddleware = ({
+export const topPeersMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     socket.on("topPeers", (payload: PeersData[]) => {

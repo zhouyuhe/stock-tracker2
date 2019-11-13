@@ -4,15 +4,13 @@ import { SocketService } from "services/socketService";
 import { Middleware } from "redux";
 import { AppState } from "store";
 
-export type Dependencies = {
+type Dependencies = {
   socketService: SocketService;
 };
-export type StockMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-export const stockMiddleware: StockMiddleware = ({
+
+export const stockMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === UPDATE_SELECTED_STOCK) {
     store.dispatch(resetAction());
     socketService

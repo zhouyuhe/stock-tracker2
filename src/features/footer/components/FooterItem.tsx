@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat();
 const getSign = (value: number | string) =>
@@ -10,12 +10,12 @@ export type FooterItemProp = {
   percentageChange: number;
   priceChange: number;
 };
-export const FooterItem = ({
+export const FooterItem: FC<FooterItemProp> = ({
   exchange,
   price,
   priceChange,
   percentageChange
-}: FooterItemProp) => {
+}) => {
   const roundValue = Math.round(priceChange * 100 * 100) / 100;
   const priceChangeFormat = roundValue.toFixed(2);
   return (

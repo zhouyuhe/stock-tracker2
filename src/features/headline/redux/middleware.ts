@@ -24,12 +24,10 @@ const dataTofetch: DataToFetch[] = [
 export type Dependencies = {
   socketService: SocketService;
 };
-export type HeadlineMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-export const headlineMiddleware: HeadlineMiddleware = ({
+
+export const headlineMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     dataTofetch.forEach(item => {

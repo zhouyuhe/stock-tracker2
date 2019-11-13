@@ -8,12 +8,9 @@ type Dependencies = {
   socketService: SocketService;
 };
 
-export type LatestNewsMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-export const latestNewsMiddleware: LatestNewsMiddleware = ({
+export const latestNewsMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     socket.on("latestNews", (payload: LatestNewsData[]) => {

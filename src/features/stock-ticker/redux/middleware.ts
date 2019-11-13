@@ -7,12 +7,10 @@ import { AppState } from "store";
 export type Dependencies = {
   socketService: SocketService;
 };
-export type StockTickerMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-export const stockTickerMiddleware: StockTickerMiddleware = ({
+
+export const stockTickerMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     socket.on("stockTicker", (payload: StockTickerData) => {

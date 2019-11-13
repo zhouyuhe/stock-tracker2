@@ -77,29 +77,31 @@ export const Search: FC = () => {
   };
 
   const options = (filteredCompanyData: CompanySymbolData[] | undefined) => {
-    if (filteredCompanyData !== undefined && filteredCompanyData.length > 0) {
-      return filteredCompanyData.map(filteredData => (
-        <tr
-          onClick={() => selectOption(filteredData)}
-          key={filteredData.symbol}
-        >
-          <td>
-            <span className="company-symbol__dropdown">
-              {filteredData.symbol}
-            </span>
-          </td>
-          <td>
-            <span className="company-name__dropdown">{filteredData.name}</span>
-            <span className="company-exchange__dropdown">
-              {filteredData.exchange}
-            </span>
-          </td>
-        </tr>
-      ));
-    } else if (filteredCompanyData === undefined) {
+    if (filteredCompanyData === undefined) {
+      // Loading
       return <SearchBox message="Loading..." />;
     }
-    return <SearchBox message="Data not found" />;
+
+    if (filteredCompanyData.length > 0) {
+      // No search results
+      return <SearchBox message="Data not found" />;
+    }
+
+    return filteredCompanyData.map(filteredData => (
+      <tr onClick={() => selectOption(filteredData)} key={filteredData.symbol}>
+        <td>
+          <span className="company-symbol__dropdown">
+            {filteredData.symbol}
+          </span>
+        </td>
+        <td>
+          <span className="company-name__dropdown">{filteredData.name}</span>
+          <span className="company-exchange__dropdown">
+            {filteredData.exchange}
+          </span>
+        </td>
+      </tr>
+    ));
   };
 
   useEffect(() => {

@@ -9,13 +9,9 @@ export type Dependencies = {
   socketService: SocketService;
 };
 
-export type ChartMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-
-export const chartMiddleware: ChartMiddleware = ({
+export const chartMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === UPDATE_CHART_RANGE) {
     const {
       stockData: { selectedStock }

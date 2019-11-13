@@ -11,6 +11,7 @@ export type StockProps = {
   name: string;
   symbol: string;
 };
+
 export const Headline = () => {
   const { selectedStockTicker } = useSelector(
     (state: AppState) => state.stockTickerData
