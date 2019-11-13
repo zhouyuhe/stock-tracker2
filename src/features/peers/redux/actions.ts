@@ -5,10 +5,12 @@ export type PeersData = {
   symbol: string;
   name: string;
 };
+
 export type UpdateTopPeersAction = ActionWithPayload<
   typeof UPDATE_TOP_PEERS,
   PeersData[]
 >;
+
 export const updateTopPeersAction = (
   topPeers: PeersData[]
 ): UpdateTopPeersAction => ({

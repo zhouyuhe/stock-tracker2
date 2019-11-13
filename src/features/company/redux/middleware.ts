@@ -2,15 +2,14 @@ import { updateCompanyOverviewAction, CompanyData } from "./actions";
 import { SocketService } from "services/socketService";
 import { Middleware } from "redux";
 import { AppState, BOOTSTRAP } from "store";
+
 export type Dependencies = {
   socketService: SocketService;
 };
-export type CompanyMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-export const companyMiddleware: CompanyMiddleware = ({
+
+export const companyMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     socket.on("companyOverview", (payload: CompanyData) => {

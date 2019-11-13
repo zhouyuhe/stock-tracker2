@@ -13,6 +13,7 @@ export type HeadlineState = {
   readonly enteredSearchQuery: string;
   readonly selectedCompanySymbols: CompanySymbolData[] | undefined;
 };
+
 const initialState: HeadlineState = {
   selectedSearch: null,
   enteredSearchQuery: "",

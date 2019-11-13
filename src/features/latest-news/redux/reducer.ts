@@ -9,6 +9,7 @@ export type LatestNewsState = {
 };
 
 const initialState = { selectedLatestNews: null };
+
 export const latestNewsReducer: Reducer<
   Readonly<LatestNewsState>,
   UpdateLatestNewsAction | ResetAction

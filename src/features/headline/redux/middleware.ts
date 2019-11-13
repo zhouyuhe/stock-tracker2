@@ -11,6 +11,7 @@ import { Middleware, AnyAction } from "redux";
 import { AppState } from "store";
 
 type TypeOfAction<T> = (input: T) => AnyAction;
+
 type DataToFetch = {
   name: string;
   action: TypeOfAction<SearchDataProps> | TypeOfAction<CompanySymbolData[]>;
@@ -24,12 +25,10 @@ const dataTofetch: DataToFetch[] = [
 export type Dependencies = {
   socketService: SocketService;
 };
-export type HeadlineMiddleware = (
-  dependencies: Dependencies
-) => Middleware<{}, AppState>;
-export const headlineMiddleware: HeadlineMiddleware = ({
+
+export const headlineMiddleware = ({
   socketService
-}) => store => next => action => {
+}: Dependencies): Middleware<{}, AppState> => store => next => action => {
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     dataTofetch.forEach(item => {

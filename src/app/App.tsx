@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Headline } from "../features/headline";
 import { Chart } from "../features/chart";
@@ -9,7 +9,7 @@ import { Footer } from "../features/footer";
 import "./App.css";
 import { AppState } from "../store";
 
-const App = () => {
+const App: FC = () => {
   const selectedStock = useSelector(
     (state: AppState) => state.stockData.selectedStock
   );

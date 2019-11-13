@@ -7,7 +7,9 @@ import { ResetAction } from "store/actions";
 export type KeyStatsState = {
   readonly selectedKeyStats: KeyStatsData | null;
 };
+
 const initialState: KeyStatsState = { selectedKeyStats: null };
+
 export const keyStatsReducer: Reducer<
   Readonly<KeyStatsState>,
   UpdateKeyStatsAction | ResetAction

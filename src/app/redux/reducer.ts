@@ -8,6 +8,7 @@ import { UPDATE_SELECTED_STOCK } from "../redux/constants";
 export type StockState = {
   readonly selectedStock: StockProps | undefined;
 };
+
 const initialState: StockState = {
   selectedStock: undefined
 };

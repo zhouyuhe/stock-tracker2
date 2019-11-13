@@ -7,7 +7,8 @@ import { Reducer } from "redux";
 export type CompanyState = {
   readonly selectedCompanyOverview: CompanyData | null;
 };
-const initialState = { selectedCompanyOverview: null };
+
+const initialState: CompanyState = { selectedCompanyOverview: null };
 
 export const companyOverviewReducer: Reducer<
   Readonly<CompanyState>,
