@@ -7,7 +7,7 @@ import { MarketStatus } from "../../market-status";
 import "./Headline.css";
 import { AppState } from "store";
 
-export type StockProps = {
+export type Stock = {
   name: string;
   symbol: string;
 };

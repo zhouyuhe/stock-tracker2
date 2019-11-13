@@ -4,12 +4,12 @@ import {
   UPDATE_SEARCH,
   UPDATE_SEARCH_QUERY
 } from "./constants";
-import { CompanySymbolData, HeadlineAction, SearchDataProps } from "./actions";
+import { CompanySymbolData, HeadlineAction, SearchData } from "./actions";
 import { Reducer } from "redux";
 import { ResetAction } from "store/actions";
 
 export type HeadlineState = {
-  readonly selectedSearch: SearchDataProps | null;
+  readonly selectedSearch: SearchData | null;
   readonly enteredSearchQuery: string;
   readonly selectedCompanySymbols: CompanySymbolData[] | undefined;
 };

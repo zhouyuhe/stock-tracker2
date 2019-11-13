@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSearchQueryAction } from "../../headline";
 import "./Search.css";
 import { AppState } from "store";
-import { StockProps } from "../../headline/components/Headline";
+import { Stock } from "../../headline/components/Headline";
 import { updateStockAction } from "app/redux/actions";
 import { CompanySymbolData } from "features/headline/redux/actions";
 import { SearchBox } from "./SearchBox";
@@ -50,9 +50,9 @@ export const Search: FC = () => {
     }
   };
 
-  const updateStock = (stock: StockProps) => dispatch(updateStockAction(stock));
+  const updateStock = (stock: Stock) => dispatch(updateStockAction(stock));
 
-  const selectOption = (data: StockProps) => {
+  const selectOption = (data: Stock) => {
     updateStock(data);
     toggleIsOpen(false);
     if (inputSelect.current) {

@@ -1,12 +1,12 @@
 import { RESET } from "store/constants";
-import { StockProps } from "../../features/headline/components/Headline";
+import { Stock } from "../../features/headline/components/Headline";
 import { Reducer } from "redux";
 import { UpdateStockAction } from "./actions";
 import { ResetAction } from "store/actions";
 import { UPDATE_SELECTED_STOCK } from "../redux/constants";
 
 export type StockState = {
-  readonly selectedStock: StockProps | undefined;
+  readonly selectedStock: Stock | undefined;
 };
 
 const initialState: StockState = {
