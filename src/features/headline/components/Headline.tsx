@@ -43,8 +43,10 @@ export const Headline: FC = () => {
       {selectedSearch && (
         <>
           <MarketStatus
-            stock={selectedStockTicker}
-            keyStats={selectedKeyStats}
+            stock={selectedStockTicker ? selectedStockTicker.latestUpdate : 0}
+            isMarketOpen={
+              selectedKeyStats ? selectedKeyStats.isUSMarketOpen : false
+            }
           />
           <div className="stockInfo__list">{labels}</div>
         </>
