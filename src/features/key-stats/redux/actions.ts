@@ -17,7 +17,7 @@ export type KeyStatsData = {
   week52High: number;
   week52Low: number;
   ytdChange: number;
-  isUSMarketOpen: string;
+  isUSMarketOpen: boolean;
   eps: number;
 };
 export type UpdateKeyStatsAction = ActionWithPayload<
