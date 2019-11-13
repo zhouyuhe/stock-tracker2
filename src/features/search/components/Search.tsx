@@ -52,8 +52,8 @@ export const Search: FC = () => {
 
   const updateStock = (stock: Stock) => dispatch(updateStockAction(stock));
 
-  const selectOption = (data: Stock) => {
-    updateStock(data);
+  const selectOption = (stock: Stock) => {
+    updateStock(stock);
     toggleIsOpen(false);
     if (inputSelect.current) {
       inputSelect.current.blur();
