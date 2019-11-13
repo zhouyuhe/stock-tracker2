@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Loading.css";
 
 type LoadingProps = {
   loaded: boolean;
   render: () => JSX.Element;
 };
-export const Loading = ({ loaded, render }: LoadingProps) => {
+export const Loading: FC<LoadingProps> = ({ loaded, render }) => {
   if (loaded) {
     return render();
   }

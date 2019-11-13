@@ -7,7 +7,9 @@ import { Reducer } from "redux";
 export type PeersState = {
   readonly selectedTopPeers: PeersData[] | null;
 };
+
 const initialState = { selectedTopPeers: null };
+
 export const peerReducer: Reducer<
   Readonly<PeersState>,
   UpdateTopPeersAction | ResetAction

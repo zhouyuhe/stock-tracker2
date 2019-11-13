@@ -20,6 +20,7 @@ export type KeyStatsData = {
   isUSMarketOpen: boolean;
   eps: number;
 };
+
 export type UpdateKeyStatsAction = ActionWithPayload<
   typeof UPDATE_KEY_STATS,
   KeyStatsData

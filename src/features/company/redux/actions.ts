@@ -7,6 +7,7 @@ export type CompanyData = {
   symbol: string;
   description: string;
 };
+
 export const updateCompanyOverviewAction = (
   companyOverview: CompanyData
 ): UpdateCompanyOverviewAction => ({

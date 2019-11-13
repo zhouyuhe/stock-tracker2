@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import logo from "./adaptive-logo.png";
 import { Search } from "../../search";
 import { useSelector } from "react-redux";
@@ -12,7 +12,7 @@ export type StockProps = {
   symbol: string;
 };
 
-export const Headline = () => {
+export const Headline: FC = () => {
   const { selectedStockTicker } = useSelector(
     (state: AppState) => state.stockTickerData
   );

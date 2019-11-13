@@ -7,6 +7,7 @@ const getSign = (value: number) => (value > 0 ? "positive" : "negative");
 type StockTickerProps = {
   stock: StockTickerData | undefined;
 };
+
 export const StockTicker: FC<StockTickerProps> = ({ stock }) => {
   const changePercent =
     stock && Math.round(stock.changePercent * 100 * 100) / 100;

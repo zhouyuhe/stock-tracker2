@@ -11,6 +11,7 @@ import { Middleware, AnyAction } from "redux";
 import { AppState } from "store";
 
 type TypeOfAction<T> = (input: T) => AnyAction;
+
 type DataToFetch = {
   name: string;
   action: TypeOfAction<SearchDataProps> | TypeOfAction<CompanySymbolData[]>;

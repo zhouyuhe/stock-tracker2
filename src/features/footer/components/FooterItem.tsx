@@ -10,6 +10,7 @@ export type FooterItemProp = {
   percentageChange: number;
   priceChange: number;
 };
+
 export const FooterItem: FC<FooterItemProp> = ({
   exchange,
   price,
