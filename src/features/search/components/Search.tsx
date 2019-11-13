@@ -82,7 +82,7 @@ export const Search: FC = () => {
       return <SearchBox message="Loading..." />;
     }
 
-    if (filteredCompanyData.length > 0) {
+    if (filteredCompanyData.length === 0) {
       // No search results
       return <SearchBox message="Data not found" />;
     }
