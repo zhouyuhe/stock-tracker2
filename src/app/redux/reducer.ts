@@ -1,5 +1,5 @@
 import { RESET } from "store/constants";
-import { Stock } from "../../features/headline/components/Headline";
+import { Stock } from "./actions";
 import { Reducer } from "redux";
 import { UpdateStockAction } from "./actions";
 import { ResetAction } from "store/actions";

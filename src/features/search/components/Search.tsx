@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSearchQueryAction } from "../../headline";
 import "./Search.css";
 import { AppState } from "store";
-import { Stock } from "../../headline/components/Headline";
+import { Stock } from "app/redux/actions";
 import { updateStockAction } from "app/redux/actions";
 import { CompanySymbolData } from "features/headline/redux/actions";
 import { SearchBox } from "./SearchBox";
