@@ -7,11 +7,6 @@ import { MarketStatus } from "../../market-status";
 import "./Headline.css";
 import { AppState } from "store";
 
-export type StockProps = {
-  name: string;
-  symbol: string;
-};
-
 export const Headline: FC = () => {
   const { selectedStockTicker } = useSelector(
     (state: AppState) => state.stockTickerData

@@ -5,7 +5,7 @@ import {
 } from "./constants";
 import { ActionWithPayload } from "store";
 
-export type SearchDataProps = {
+export type SearchData = {
   primaryExchange: string;
   sector: string;
   currency: string;
@@ -15,11 +15,9 @@ export type SearchDataProps = {
 
 export type UpdateSearchAction = ActionWithPayload<
   typeof UPDATE_SEARCH,
-  SearchDataProps
+  SearchData
 >;
-export const updateSearchAction = (
-  search: SearchDataProps
-): UpdateSearchAction => ({
+export const updateSearchAction = (search: SearchData): UpdateSearchAction => ({
   type: UPDATE_SEARCH,
   payload: search
 });

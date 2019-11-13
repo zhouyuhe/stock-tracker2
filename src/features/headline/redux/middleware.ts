@@ -2,7 +2,7 @@ import { BOOTSTRAP } from "../../../store/constants";
 import {
   updateCompanySymbolsAction,
   updateSearchAction,
-  SearchDataProps,
+  SearchData,
   CompanySymbolData
 } from "./actions";
 import { UPDATE_SEARCH_QUERY } from "./constants";
@@ -14,7 +14,7 @@ type TypeOfAction<T> = (input: T) => AnyAction;
 
 type DataToFetch = {
   name: string;
-  action: TypeOfAction<SearchDataProps> | TypeOfAction<CompanySymbolData[]>;
+  action: TypeOfAction<SearchData> | TypeOfAction<CompanySymbolData[]>;
 };
 
 const dataTofetch: DataToFetch[] = [
@@ -32,7 +32,7 @@ export const headlineMiddleware = ({
   if (action.type === BOOTSTRAP) {
     const socket = socketService.get();
     dataTofetch.forEach(item => {
-      socket.on(item.name, (payload: SearchDataProps & CompanySymbolData[]) => {
+      socket.on(item.name, (payload: SearchData & CompanySymbolData[]) => {
         store.dispatch(item.action(payload));
       });
     });
