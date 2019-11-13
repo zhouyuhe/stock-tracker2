@@ -8,13 +8,15 @@ type MarketStatusProps = {
   stock: StockTickerData | undefined;
   keyStats: KeyStatsData | null;
 };
-const marketSign = (value: number) =>
-  value === null ? "market---moon" : "market---sun";
+const marketSign = (value: boolean) =>
+  value === false ? "market---moon" : "market---sun";
 
 export const MarketStatus: FC<MarketStatusProps> = ({ stock, keyStats }) => {
   const correctFormat = stock && moment(stock.latestUpdate).format("lll");
   const marketStatus =
-    keyStats && keyStats.open === null ? "Market Closed" : "Market Open";
+    keyStats && keyStats.isUSMarketOpen === false
+      ? "Market Closed"
+      : "Market Open";
 
   return (
     <div className="market">
@@ -23,7 +25,9 @@ export const MarketStatus: FC<MarketStatusProps> = ({ stock, keyStats }) => {
           Real-Time Price as of {correctFormat} EST
         </span>{" "}
         {keyStats && (
-          <span className={marketSign(keyStats.open)}> {marketStatus}</span>
+          <span className={marketSign(keyStats.isUSMarketOpen)}>
+            {marketStatus}
+          </span>
         )}
       </p>
     </div>

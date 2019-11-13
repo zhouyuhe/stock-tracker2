@@ -27,7 +27,7 @@ describe("with an UPDATE_KEY_STATS action", () => {
         week52High: 3,
         week52Low: 2,
         ytdChange: 2,
-        isUSMarketOpen: "true",
+        isUSMarketOpen: true,
         eps: 240
       }
     };
@@ -51,7 +51,7 @@ describe("with an UPDATE_KEY_STATS action", () => {
       week52High: 3,
       week52Low: 2,
       ytdChange: 2,
-      isUSMarketOpen: "true",
+      isUSMarketOpen: true,
       eps: 240
     });
   });
