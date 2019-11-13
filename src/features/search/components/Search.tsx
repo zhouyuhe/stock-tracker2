@@ -12,6 +12,8 @@ import "./Search.css";
 import { AppState } from "store";
 import { StockProps } from "../../headline/components/Headline";
 import { updateStockAction } from "app/redux/actions";
+import { CompanySymbolData } from "features/headline/redux/actions";
+import { SearchBox } from "./SearchBox";
 
 export const Search: FC = () => {
   const dispatch = useDispatch();
@@ -39,9 +41,9 @@ export const Search: FC = () => {
   }) => {
     const symbolUpper = symbol.toUpperCase();
     if (key === "Enter") {
-      const selectedDatum = filteredSymbols.find(
-        datum => datum.symbol === symbolUpper
-      );
+      const selectedDatum =
+        filteredSymbols &&
+        filteredSymbols.find(datum => datum.symbol === symbolUpper);
       if (selectedDatum) {
         selectOption({ symbol, name: selectedDatum.name });
       }
@@ -74,34 +76,35 @@ export const Search: FC = () => {
     });
   };
 
-  const options =
-    filteredSymbols.length > 0 ? (
-      filteredSymbols.map(data => {
-        return (
-          <tr onClick={() => selectOption(data)} key={data.symbol}>
-            <td>
-              <span className="company-symbol__dropdown">{data.symbol}</span>
-            </td>
-            <td>
-              <span className="company-name__dropdown">{data.name}</span>
-              <span className="company-exchange__dropdown">
-                {data.exchange}
-              </span>
-            </td>
-          </tr>
-        );
-      })
-    ) : (
-      <tr>
-        <td>
-          <span className="company-name__dropdown">No symbols found</span>
-        </td>
-      </tr>
-    );
+  const options = (filteredCompanyData: CompanySymbolData[] | undefined) => {
+    if (filteredCompanyData !== undefined && filteredCompanyData.length > 0) {
+      return filteredCompanyData.map(filteredData => (
+        <tr
+          onClick={() => selectOption(filteredData)}
+          key={filteredData.symbol}
+        >
+          <td>
+            <span className="company-symbol__dropdown">
+              {filteredData.symbol}
+            </span>
+          </td>
+          <td>
+            <span className="company-name__dropdown">{filteredData.name}</span>
+            <span className="company-exchange__dropdown">
+              {filteredData.exchange}
+            </span>
+          </td>
+        </tr>
+      ));
+    } else if (filteredCompanyData === undefined) {
+      return <SearchBox message="Loading..." />;
+    }
+    return <SearchBox message="Data not found" />;
+  };
 
   useEffect(() => {
-    toggleIsOpen(filteredSymbols.length !== 0);
-  }, [filteredSymbols.length]);
+    toggleIsOpen(filteredSymbols !== undefined);
+  }, [filteredSymbols]);
 
   return (
     <>
@@ -133,7 +136,7 @@ export const Search: FC = () => {
         style={{ display: isOpen ? "block" : "none" }}
         tabIndex={0}
       >
-        <tbody>{options}</tbody>
+        <tbody>{options(filteredSymbols)}</tbody>
       </table>
     </>
   );
