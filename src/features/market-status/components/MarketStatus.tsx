@@ -26,7 +26,6 @@ export const MarketStatus: FC<MarketStatusProps> = ({ stock, keyStats }) => {
         </span>{" "}
         {keyStats && (
           <span className={marketSign(keyStats.isUSMarketOpen)}>
-            {" "}
             {marketStatus}
           </span>
         )}
