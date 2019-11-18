@@ -10,7 +10,7 @@ const createInitialState: AppState = {
     selectedCompanySymbols: []
   },
   chartData: {
-    selectedChartRange: "5y",
+    selectedChartRange: "5Y",
     selectedChartData: null
   },
   keyStatsData: {

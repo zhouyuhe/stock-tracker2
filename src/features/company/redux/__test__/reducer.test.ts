@@ -21,7 +21,7 @@ describe("with an UPDATE_COMPANY_OVERVIEW action", () => {
     newState = companyOverviewReducer(initialState, action);
   });
 
-  it('it updates company overview to "Apple Inc."', () => {
+  it("it updates company overview with website, companyName, symbol and description", () => {
     expect(newState.selectedCompanyOverview).toEqual({
       website: "Apple Inc.com",
       companyName: "apple",

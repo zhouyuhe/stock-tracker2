@@ -16,7 +16,7 @@ describe("with an UPDATE_LATEST_NEWS action", () => {
     newState = latestNewsReducer(initialState, action);
   });
 
-  it('it updates the latest news to "NEWS"', () => {
+  it("it updates the latest news with headline, source, date and url", () => {
     expect(newState.selectedLatestNews).toEqual([
       { headline: "hi", source: "FT", date: 121, url: "www.ft.com" }
     ]);

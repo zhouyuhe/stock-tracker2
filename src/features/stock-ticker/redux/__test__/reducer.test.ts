@@ -21,7 +21,7 @@ describe("with an UPDATE_STOCK_TICKER action", () => {
     newState = stockTickerReducer(initialState, action);
   });
 
-  it('it updates stock to "Stock"', () => {
+  it("it updates stock with latestPrice, latestUpdate, change and changePercent", () => {
     expect(newState.selectedStockTicker).toEqual({
       latestPrice: 1,
       latestUpdate: 12345,

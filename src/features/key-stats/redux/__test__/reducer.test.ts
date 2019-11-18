@@ -34,7 +34,7 @@ describe("with an UPDATE_KEY_STATS action", () => {
     newState = keyStatsReducer(initialState, action);
   });
 
-  it('it updates the key statistics to "STATS"', () => {
+  it("it updates the key statistics", () => {
     expect(newState.selectedKeyStats).toEqual({
       companyName: "apple",
       symbol: "aapl",
