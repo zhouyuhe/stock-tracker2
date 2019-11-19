@@ -1,7 +1,7 @@
 import { PeersDependencies, topPeersMiddleware } from "../middleware";
 import { Store, Dispatch } from "redux";
 import { AppState, BOOTSTRAP } from "store";
-import { updateTopPeersAction, PeersData } from "../actions";
+import { PeersData } from "../actions";
 import { BootstrapAction } from "store/actions";
 
 describe.only("Testing the Peers Middleware", () => {
@@ -19,6 +19,7 @@ describe.only("Testing the Peers Middleware", () => {
     getState = jest.fn();
     on = jest.fn();
     emit = jest.fn();
+
     mockSocket = {
       socketService: {
         get: () => ({ on, emit })
@@ -46,22 +47,30 @@ describe.only("Testing the Peers Middleware", () => {
 
   test("with correct payload", () => {
     const topPeers = "topPeers";
-    const payload = [{ symbol: "AAPL", name: "APPLE" }];
     topPeersMiddleware(mockSocket)(store)(next)(action);
-
     expect(on).toHaveBeenCalledWith(topPeers, expect.anything());
   });
 
-  test.only("can we test on emitting event", () => {
-    let theName = undefined;
-    let on = (name: string, callback: (payload: any) => void) => {
-      console.log("Test");
-      theName = name;
-    };
+  test("can we test on emitting event", () => {
     const topPeers = "topPeers";
     const payload = [{ symbol: "AAPL", name: "APPLE" }];
+    const updateAction = {
+      payload: [{ name: "APPLE", symbol: "AAPL" }],
+      type: "UPDATE_TOP_PEERS"
+    };
+    const newOn = jest.fn(
+      (name: string, callback: (payload: PeersData[]) => any): any => {
+        callback(payload);
+      }
+    );
+    mockSocket = {
+      socketService: {
+        get: () => ({ on: newOn, emit })
+      }
+    };
     topPeersMiddleware(mockSocket)(store)(next)(action);
-    console.log("Hello");
-    expect(theName).toBe(topPeers);
+    expect(newOn).toHaveBeenCalledWith(topPeers, expect.anything());
+
+    expect(dispatch).toHaveBeenCalledWith(updateAction);
   });
 });
