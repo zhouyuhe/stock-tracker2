@@ -15,7 +15,8 @@ export const topPeersMiddleware = ({
   Pick<AppState, "peerData">
 > => store => next => action => {
   if (action.type === BOOTSTRAP) {
-    socketService.get().on("topPeers", (payload: PeersData[]) => {
+    const socket = socketService.get();
+    socket.on("topPeers", (payload: PeersData[]) => {
       store.dispatch(updateTopPeersAction(payload));
     });
   }

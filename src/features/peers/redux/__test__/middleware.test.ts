@@ -17,9 +17,12 @@ describe.only("Testing the Peers Middleware", () => {
   beforeEach(() => {
     dispatch = jest.fn();
     getState = jest.fn();
-    on = jest.fn();
     emit = jest.fn();
 
+    const payload = [{ symbol: "AAPL", name: "APPLE" }];
+    on = jest.fn((name: string, callback: (payload: PeersData[]) => void) => {
+      callback(payload);
+    });
     mockSocket = {
       socketService: {
         get: () => ({ on, emit })
@@ -35,42 +38,16 @@ describe.only("Testing the Peers Middleware", () => {
     };
   });
 
-  test("Should call On and next function", () => {
-    topPeersMiddleware(mockSocket)(store)(next)({
-      type: BOOTSTRAP
-    });
-    expect(on).toHaveBeenCalled();
-    expect(next).toHaveBeenCalled();
-    expect(getState).toHaveBeenCalledTimes(0);
-    expect(dispatch).toHaveBeenCalledTimes(0);
-  });
-
   test("with correct payload", () => {
     const topPeers = "topPeers";
-    topPeersMiddleware(mockSocket)(store)(next)(action);
-    expect(on).toHaveBeenCalledWith(topPeers, expect.anything());
-  });
-
-  test("can we test on emitting event", () => {
-    const topPeers = "topPeers";
-    const payload = [{ symbol: "AAPL", name: "APPLE" }];
     const updateAction = {
       payload: [{ name: "APPLE", symbol: "AAPL" }],
       type: "UPDATE_TOP_PEERS"
     };
-    const newOn = jest.fn(
-      (name: string, callback: (payload: PeersData[]) => any): any => {
-        callback(payload);
-      }
-    );
-    mockSocket = {
-      socketService: {
-        get: () => ({ on: newOn, emit })
-      }
-    };
     topPeersMiddleware(mockSocket)(store)(next)(action);
-    expect(newOn).toHaveBeenCalledWith(topPeers, expect.anything());
-
+    expect(next).toHaveBeenCalled();
+    expect(on).toHaveBeenCalledWith(topPeers, expect.anything());
+    expect(getState).toHaveBeenCalledTimes(0);
     expect(dispatch).toHaveBeenCalledWith(updateAction);
   });
 });
