@@ -18,7 +18,6 @@ describe.only("Testing the Peers Middleware", () => {
     dispatch = jest.fn();
     getState = jest.fn();
     emit = jest.fn();
-
     const payload = [{ symbol: "AAPL", name: "APPLE" }];
     on = jest.fn((name: string, callback: (payload: PeersData[]) => void) => {
       callback(payload);
@@ -48,6 +47,7 @@ describe.only("Testing the Peers Middleware", () => {
     expect(next).toHaveBeenCalled();
     expect(on).toHaveBeenCalledWith(topPeers, expect.anything());
     expect(getState).toHaveBeenCalledTimes(0);
+    expect(emit).toHaveBeenCalledTimes(0);
     expect(dispatch).toHaveBeenCalledWith(updateAction);
   });
 });
