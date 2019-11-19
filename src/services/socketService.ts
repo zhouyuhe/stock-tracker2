@@ -5,7 +5,7 @@ const PORT = 4000;
 const SERVER = `${HOST}:${PORT}`;
 
 const createSocketService = () => {
-  let socket: SocketIOClient.Socket;
+  let socket: SocketOperation;
 
   function get() {
     return socket || (socket = io(SERVER));
@@ -16,3 +16,4 @@ const createSocketService = () => {
 
 export const socketService = createSocketService();
 export type SocketService = typeof socketService;
+export type SocketOperation = Pick<SocketIOClient.Socket, "on" | "emit">;
