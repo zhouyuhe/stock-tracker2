@@ -52,16 +52,22 @@ describe.only("Testing the Peers Middleware", () => {
     expect(on).toHaveBeenCalledWith(topPeers, expect.anything());
   });
 
-  test.only("can we test on emitting event", () => {
-    let theName = undefined;
-    let on = (name: string, callback: (payload: any) => void) => {
-      console.log("Test");
-      theName = name;
-    };
+  test("can we test on emitting event", () => {
     const topPeers = "topPeers";
     const payload = [{ symbol: "AAPL", name: "APPLE" }];
+    const newOn = jest.fn(
+      (name: string, callback: (payload: PeersData[]) => any): any => {
+        callback(payload);
+      }
+    );
+    mockSocket = {
+      socketService: {
+        get: () => ({ on: newOn, emit })
+      }
+    };
     topPeersMiddleware(mockSocket)(store)(next)(action);
-    console.log("Hello");
-    expect(theName).toBe(topPeers);
+    expect(newOn).toHaveBeenCalledWith(topPeers, expect.anything());
+
+    expect(dispatch).toHaveBeenCalledWith();
   });
 });
