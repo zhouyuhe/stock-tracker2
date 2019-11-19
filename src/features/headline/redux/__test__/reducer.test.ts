@@ -32,7 +32,7 @@ describe("with an UPDATE_SEARCH action", () => {
     newState = headlineReducer(initialState, action);
   });
 
-  it('it updates the search query to be "AA"', () => {
+  it("it updates the search query with primaryExchange, sector, currency, companyName and symbol", () => {
     expect(newState.selectedSearch).toEqual({
       primaryExchange: "S&P",
       sector: "Tech",

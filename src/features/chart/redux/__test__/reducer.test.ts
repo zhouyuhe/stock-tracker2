@@ -17,7 +17,7 @@ describe("with an UPDATE_CHART_RANGE action", () => {
     newState = chartReducer(initialState, action);
   });
 
-  it("it updates the selected chart range to 2y", () => {
+  it("it updates the selected chart range to 1Y", () => {
     expect(newState.selectedChartRange).toBe("1Y");
   });
 });
@@ -37,7 +37,7 @@ describe("with an UPDATE_CHART_DATA action", () => {
     newState = chartReducer(initialState, action);
   });
 
-  it('it updates the chart to "Chart Data"', () => {
+  it("it updates the chart to Chart Data with date and close", () => {
     expect(newState.selectedChartData).toEqual([
       { date: "2014-09-09", close: 2 }
     ]);

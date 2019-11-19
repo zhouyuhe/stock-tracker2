@@ -16,7 +16,7 @@ describe("with an UPDATE_TOP_PEERS action", () => {
     newState = peerReducer(initialState, action);
   });
 
-  it('it updates top peers to "Peers"', () => {
+  it("it updates top peers with name and symbol", () => {
     expect(newState.selectedTopPeers).toEqual([{ name: "Peers", symbol: "a" }]);
   });
 });
