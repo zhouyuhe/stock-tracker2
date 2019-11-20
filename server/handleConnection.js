@@ -91,7 +91,7 @@ exports.handleConnection = socket => {
     );
   });
 
-  socket.on("searchQuery", inputQuery => {
+  socket.on("enteredSearchQuery", inputQuery => {
     emitSearchQuery(socket, inputQuery, allSymbols);
   });
 
