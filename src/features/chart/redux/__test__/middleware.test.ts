@@ -1,8 +1,11 @@
 import { ChartData } from "../actions";
+import { BOOTSTRAP } from "store";
+import { chartMiddleware } from "../middleware";
+import { UPDATE_CHART_RANGE } from "../constants";
 
 describe("Testing Chart Middleware", () => {
   let mockSocket: any;
-  let sockService: any;
+  let socketService: any;
   let store: any;
   let next: jest.Mock;
 
@@ -14,16 +17,32 @@ describe("Testing Chart Middleware", () => {
       }),
       emit: jest.fn()
     };
-    sockService = {
+    socketService = {
       get: () => mockSocket
     };
 
-    const stockState = { selectedStock: { name: "APPLE", symbol: "AAPL" } };
+    const stockState = {
+      stockData: { selectedStock: { name: "APPLE", symbol: "AAPL" } }
+    };
 
     store = {
       getState: jest.fn(() => stockState),
       dispatch: jest.fn()
     };
     next = jest.fn();
+  });
+
+  test("socket.on been called", () => {
+    const action = { type: BOOTSTRAP };
+    const mockChartMiddleware = chartMiddleware({ socketService });
+    mockChartMiddleware(store)(next)(action);
+    expect(mockSocket.on).toHaveBeenCalledWith("chartData", expect.anything());
+  });
+
+  test("socket.emit been called", () => {
+    const action = { type: UPDATE_CHART_RANGE, payload: "1Y" };
+    const mockChartMiddleware = chartMiddleware({ socketService });
+    mockChartMiddleware(store)(next)(action);
+    expect(mockSocket.emit).toHaveBeenCalledWith("timeRange", "AAPL", "1Y");
   });
 });
