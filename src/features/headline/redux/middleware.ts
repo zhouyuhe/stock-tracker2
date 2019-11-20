@@ -19,7 +19,7 @@ type DataToFetch = {
 
 const dataTofetch: DataToFetch[] = [
   { name: "sectorInformation", action: updateSearchAction },
-  { name: "companySymbols", action: updateCompanySymbolsAction }
+  { name: "suggestedCompanies", action: updateCompanySymbolsAction }
 ];
 
 export type Dependencies = {
@@ -38,7 +38,7 @@ export const headlineMiddleware = ({
     });
   }
   if (action.type === UPDATE_SEARCH_QUERY) {
-    socketService.get().emit("searchQuery", action.payload);
+    socketService.get().emit("enteredSearchQuery", action.payload);
   }
   return next(action);
 };
