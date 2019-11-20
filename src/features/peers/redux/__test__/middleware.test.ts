@@ -1,53 +1,50 @@
-import { PeersDependencies, topPeersMiddleware } from "../middleware";
-import { Store, Dispatch } from "redux";
-import { AppState, BOOTSTRAP } from "store";
+import { topPeersMiddleware } from "../middleware";
+import { BOOTSTRAP } from "store";
 import { PeersData } from "../actions";
-import { BootstrapAction } from "store/actions";
 
 describe.only("Testing the Peers Middleware", () => {
-  let mockSocket: PeersDependencies;
-  let store: Pick<Store<Pick<AppState, "peerData">>, "dispatch" | "getState">;
-  let next: Dispatch;
-  let on: jest.Mock;
-  let emit: jest.Mock;
-  let action: BootstrapAction;
-  let dispatch: jest.Mock;
-  let getState: jest.Mock;
+  let mockSocket: any;
+  let socketService: any;
+  let store: any;
+  let next: jest.Mock;
 
   beforeEach(() => {
-    dispatch = jest.fn();
-    getState = jest.fn();
-    emit = jest.fn();
     const payload = [{ symbol: "AAPL", name: "APPLE" }];
-    on = jest.fn((name: string, callback: (payload: PeersData[]) => void) => {
-      callback(payload);
-    });
     mockSocket = {
-      socketService: {
-        get: () => ({ on, emit })
-      }
+      on: jest.fn((name: string, callback: (payload: PeersData[]) => void) => {
+        callback(payload);
+      })
     };
+    socketService = {
+      get: () => mockSocket
+    };
+
+    const peerState = { selectedTopPeers: [{ symbol: "AAPL", name: "APPLE" }] };
+
     store = {
-      dispatch,
-      getState
+      getState: jest.fn(() => peerState),
+      dispatch: jest.fn()
     };
+
     next = jest.fn();
-    action = {
-      type: BOOTSTRAP
-    };
   });
 
-  test("with correct payload", () => {
-    const topPeers = "topPeers";
+  test.only("socket.on and dispatch been called", () => {
+    const action = { type: BOOTSTRAP };
+    const peerMiddleware = topPeersMiddleware({ socketService });
     const updateAction = {
       payload: [{ name: "APPLE", symbol: "AAPL" }],
       type: "UPDATE_TOP_PEERS"
     };
-    topPeersMiddleware(mockSocket)(store)(next)(action);
-    expect(next).toHaveBeenCalled();
-    expect(on).toHaveBeenCalledWith(topPeers, expect.anything());
-    expect(getState).toHaveBeenCalledTimes(0);
-    expect(emit).toHaveBeenCalledTimes(0);
-    expect(dispatch).toHaveBeenCalledWith(updateAction);
+    peerMiddleware(store)(next)(action);
+    expect(mockSocket.on).toHaveBeenCalledWith("topPeers", expect.anything());
+    expect(store.dispatch).toHaveBeenCalledWith(updateAction);
+  });
+
+  test.only("should call the next middleware", () => {
+    const action = { type: BOOTSTRAP };
+    const peerMiddleware = topPeersMiddleware({ socketService });
+    peerMiddleware(store)(next)(action);
+    expect(next).toHaveBeenCalledWith(action);
   });
 });
