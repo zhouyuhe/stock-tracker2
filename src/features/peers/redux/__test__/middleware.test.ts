@@ -2,7 +2,7 @@ import { topPeersMiddleware } from "../middleware";
 import { BOOTSTRAP } from "store";
 import { PeersData } from "../actions";
 
-describe.only("Testing the Peers Middleware", () => {
+describe("Testing the Peers Middleware", () => {
   let mockSocket: any;
   let socketService: any;
   let store: any;
