@@ -32,14 +32,14 @@ describe("Testing Chart Middleware", () => {
     next = jest.fn();
   });
 
-  test("socket.on been called", () => {
+  test("socket.on been called with a function", () => {
     const action = { type: BOOTSTRAP };
     const mockChartMiddleware = chartMiddleware({ socketService });
     mockChartMiddleware(store)(next)(action);
     expect(mockSocket.on).toHaveBeenCalledWith("chartData", expect.anything());
   });
 
-  test("Within socket.on, dispatch been called", () => {
+  test("dispatch has been called with updateAction", () => {
     const action = { type: BOOTSTRAP };
     const mockChartMiddleware = chartMiddleware({ socketService });
     const updateAction = {
@@ -47,13 +47,13 @@ describe("Testing Chart Middleware", () => {
       type: "UPDATE_CHART_DATA"
     };
     mockChartMiddleware(store)(next)(action);
-    expect(store.dispatch).toHaveBeenCalledWith(updateAction);
+    expect(store.dispatch).toBeCalledWith(updateAction);
   });
 
-  test("socket.emit been called", () => {
+  test("socket.emit been called with timeRange,AAPL, 1Y", () => {
     const action = { type: UPDATE_CHART_RANGE, payload: "1Y" };
     const mockChartMiddleware = chartMiddleware({ socketService });
     mockChartMiddleware(store)(next)(action);
-    expect(mockSocket.emit).toHaveBeenCalledWith("timeRange", "AAPL", "1Y");
+    expect(mockSocket.emit).toBeCalledWith("timeRange", "AAPL", "1Y");
   });
 });
