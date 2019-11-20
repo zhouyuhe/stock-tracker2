@@ -39,6 +39,17 @@ describe("Testing Chart Middleware", () => {
     expect(mockSocket.on).toHaveBeenCalledWith("chartData", expect.anything());
   });
 
+  test("Within socket.on, dispatch been called", () => {
+    const action = { type: BOOTSTRAP };
+    const mockChartMiddleware = chartMiddleware({ socketService });
+    const updateAction = {
+      payload: [{ date: "123", close: 23 }],
+      type: "UPDATE_CHART_DATA"
+    };
+    mockChartMiddleware(store)(next)(action);
+    expect(store.dispatch).toHaveBeenCalledWith(updateAction);
+  });
+
   test("socket.emit been called", () => {
     const action = { type: UPDATE_CHART_RANGE, payload: "1Y" };
     const mockChartMiddleware = chartMiddleware({ socketService });
