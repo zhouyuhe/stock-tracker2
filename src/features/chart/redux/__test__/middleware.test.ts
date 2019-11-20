@@ -36,7 +36,7 @@ describe("Testing Chart Middleware", () => {
     const action = { type: BOOTSTRAP };
     const mockChartMiddleware = chartMiddleware({ socketService });
     mockChartMiddleware(store)(next)(action);
-    expect(mockSocket.on).toHaveBeenCalledWith("chartData", expect.anything());
+    expect(mockSocket.on).toBeCalledWith("chartData", expect.anything());
   });
 
   test("dispatch has been called with updateAction", () => {
