@@ -24,21 +24,20 @@ exports.handleConnection = socket => {
   const timerIDs = {};
   const allSymbols = getAllCompanies(HOST, TOKEN);
   console.info("New client connected");
+  Object.values(timerIDs).forEach(clearInterval);
 
-  socket.on("stockName", async (stockName, timeRange) => {
-    if (stockName === "") {
-      return false;
-    }
-    console.info("Stock entered: ", stockName);
-    Object.values(timerIDs).forEach(clearInterval);
+  socket.on("getStockTicker", stockName => {
     timerIDs.stockTicker = callAndStartIntervals(
       emitStockTicker,
-      ONE_DAY_IN_MS,
+      5000,
       socket,
       stockName,
       HOST,
       TOKEN
     );
+  });
+
+  socket.on("getKeyStats", stockName => {
     timerIDs.keyStats = callAndStartIntervals(
       emitKeyStats,
       ONE_DAY_IN_MS,
@@ -47,6 +46,9 @@ exports.handleConnection = socket => {
       HOST,
       TOKEN
     );
+  });
+
+  socket.on("getLatestNews", stockName => {
     timerIDs.latestNews = callAndStartIntervals(
       emitLatestNews,
       ONE_DAY_IN_MS,
@@ -55,6 +57,9 @@ exports.handleConnection = socket => {
       HOST,
       TOKEN
     );
+  });
+
+  socket.on("getCompanyOverview", stockName => {
     timerIDs.companyOverview = callAndStartIntervals(
       emitCompanyOverview,
       ONE_DAY_IN_MS,
@@ -63,6 +68,9 @@ exports.handleConnection = socket => {
       HOST,
       TOKEN
     );
+  });
+
+  socket.on("getPeersData", stockName => {
     timerIDs.topPeers = callAndStartIntervals(
       emitTopPeers,
       ONE_DAY_IN_MS,
@@ -72,6 +80,9 @@ exports.handleConnection = socket => {
       TOKEN,
       allSymbols
     );
+  });
+
+  socket.on("getChartData", (stockName, timeRange) => {
     timerIDs.chartData = callAndStartIntervals(
       emitChartData,
       ONE_DAY_IN_MS,
@@ -81,6 +92,9 @@ exports.handleConnection = socket => {
       HOST,
       TOKEN
     );
+  });
+
+  socket.on("getSectorInformation", stockName => {
     timerIDs.sectorInformation = callAndStartIntervals(
       emitSectorInformation,
       ONE_DAY_IN_MS,
