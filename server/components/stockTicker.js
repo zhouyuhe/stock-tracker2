@@ -1,5 +1,5 @@
 const axios = require("axios");
-exports.emitStockTicker = async (socket, stockName, HOST, TOKEN) => {
+exports.getStockTicker = (HOST, TOKEN) => async stockName => {
   try {
     const quote = await axios.get(
       `${HOST}/stock/${stockName}/quote?token=${TOKEN}`
@@ -12,10 +12,10 @@ exports.emitStockTicker = async (socket, stockName, HOST, TOKEN) => {
       change,
       changePercent
     };
+    return stockTicker;
 
-    socket.emit("stockTicker", stockTicker);
+    // socket.emit("stockTicker", stockTicker);
   } catch (error) {
-    //TODO: Handle error
-    console.error(`Error: ${error}`);
+    return error;
   }
 };
