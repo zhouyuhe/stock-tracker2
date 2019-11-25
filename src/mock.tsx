@@ -91,11 +91,14 @@ class StockService implements StockAPI {
       timeRange
     );
   }
-  getAll(stockName: string) {
+  getAll(stockName: string, timeRange: string) {
     return Promise.all([
       this.getKeyStats(stockName),
       this.getLatestNews(stockName),
-      this.getStockTcker(stockName)
+      this.getStockTcker(stockName),
+      this.getChart(stockName, timeRange),
+      this.getSectorInformation(stockName),
+      this.getCompanyOverview(stockName)
     ]);
   }
 }
@@ -104,7 +107,7 @@ const service = new StockService(socketService.get());
 
 export const Mock = () => {
   useEffect(() => {
-    // service.getAll('AAPL').then(console.log).catch(console.log)
+    // service.getAll('AAPL','1Y').then(console.log).catch(console.log)
     service
       .getStockTcker("AAPL")
       .then(console.log)
