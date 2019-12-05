@@ -14,7 +14,6 @@ exports.emitChartData = async (socket, stockName, timeRange, HOST, TOKEN) => {
         return chart.data.map(data => ({ close: data.close, date: data.date }));
     };
     const chartData = time(timeRange);
-
     socket.emit("chartData", chartData);
   } catch (error) {
     console.error(`Error: ${error}`);

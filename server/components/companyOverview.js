@@ -11,7 +11,6 @@ exports.emitCompanyOverview = async (socket, stockName, HOST, TOKEN) => {
       symbol,
       companyName
     };
-
     socket.emit("companyOverview", companyOverview);
   } catch (error) {
     console.error(`Error: ${error}`);
