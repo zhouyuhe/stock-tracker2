@@ -32,6 +32,7 @@ export const Search: FC = () => {
   }) => {
     setSearchQuery(value);
     dispatch(updateSearchQueryAction(value));
+    //if the value exist, then open the dropList
     toggleIsOpen(value.length > 0);
   };
 
@@ -43,13 +44,16 @@ export const Search: FC = () => {
     if (key === "Enter") {
       const selectedDatum =
         filteredSymbols &&
+        //find the correct one (first match the cases)
         filteredSymbols.find(datum => datum.symbol === symbolUpper);
       if (selectedDatum) {
+        //select option contain both symbol and name
         selectOption({ symbol, name: selectedDatum.name });
       }
     }
   };
 
+  //dispatch update stock action
   const updateStock = (stock: Stock) => dispatch(updateStockAction(stock));
 
   const selectOption = (stock: Stock) => {
@@ -106,6 +110,8 @@ export const Search: FC = () => {
 
   useEffect(() => {
     toggleIsOpen(filteredSymbols !== undefined);
+    // set the toggleOpen status depends on value exist or not
+    // render if the filterSymbol changes
   }, [filteredSymbols]);
 
   return (

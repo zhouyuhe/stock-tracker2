@@ -7,9 +7,10 @@ type LoadingProps = {
 };
 export const Loading: FC<LoadingProps> = ({ loaded, render }) => {
   if (loaded) {
+    //render that component
     return render();
   }
-
+  //otherwise loading spinner
   return (
     <div className="center-spinner">
       <div className="loading-spinner"></div>

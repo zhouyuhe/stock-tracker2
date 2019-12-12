@@ -24,6 +24,7 @@ const chartRange: ChartRange[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
 const yaxisFormat = (item: number) => item.toFixed(2);
 
 const formatDate = (isoDate: string, chartRange: ChartRange) => {
+  // create new instance
   const date = new Date(isoDate);
   switch (chartRange) {
     case "MAX":
